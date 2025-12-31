@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petra Dubai | Luxury Real Estate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Sarabun:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #060606;
+            --dark-green: #132116;
+            --charcoal: #222222;
+            --gray-dark: #59595C;
+            --gray-mid: #727476;
+            --gray-light: #C4C4C4;
+            --gray-lighter: #D3D3D3;
+            --off-white: #EAECEE;
+            --white: #FFFFFF;
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Sarabun', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-weight: 300;
+            background: var(--white);
+            color: var(--charcoal);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Loading Screen */
+        .loader {
+            position: fixed;
+            inset: 0;
+            background: var(--white);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-logo {
+            height: 60px;
+            opacity: 0;
+        }
+
+        .loader-line {
+            width: 0;
+            height: 1px;
+            background: var(--charcoal);
+            margin: 2rem auto 0;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            mix-blend-mode: difference;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            mix-blend-mode: normal;
+            backdrop-filter: blur(20px);
+            padding: 1.5rem 4rem;
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-logo {
+            height: 40px;
+            filter: invert(1);
+            transition: filter 0.3s ease;
+        }
+
+        nav.scrolled .nav-logo {
+            filter: invert(0);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: opacity 0.3s ease;
+        }
+
+        nav.scrolled .nav-links a {
+            color: var(--charcoal);
+        }
+
+        .nav-links a:hover {
+            opacity: 0.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(6, 6, 6, 0.3) 0%,
+                rgba(6, 6, 6, 0.2) 50%,
+                rgba(6, 6, 6, 0.5) 100%
+            );
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: var(--white);
+            padding: 2rem;
+        }
+
+        .hero-logo {
+            width: 180px;
+            margin-bottom: 3rem;
+            opacity: 0;
+        }
+
+        .hero-tagline {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .hero-tagline .line {
+            display: block;
+            transform: translateY(110%);
+        }
+
+        .hero-subtitle {
+            font-size: 0.9rem;
+            font-weight: 300;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gray-lighter);
+            margin-bottom: 3rem;
+            opacity: 0;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            padding: 1rem 3rem;
+            border: 1px solid var(--white);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+            opacity: 0;
+        }
+
+        .hero-cta:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            opacity: 0;
+        }
+
+        .scroll-indicator span {
+            display: block;
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--white), transparent);
+            animation: scrollPulse 2s infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
+            50% { opacity: 1; transform: scaleY(1); }
+        }
+
+        /* Sections Common */
+        section {
+            padding: 10rem 4rem;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gray-mid);
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 300;
+            color: var(--black);
+            margin-bottom: 3rem;
+            line-height: 1.3;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        /* Difference Section */
+        .difference {
+            background: var(--white);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .difference-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8rem;
+            align-items: start;
+        }
+
+        .difference-text p {
+            font-size: 1.1rem;
+            color: var(--gray-dark);
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .difference-image {
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .difference-image img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+        }
+
+        .difference-image::after {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            right: -2rem;
+            bottom: -2rem;
+            border: 1px solid var(--gray-light);
+            z-index: -1;
+        }
+
+        /* Services Section */
+        .services {
+            background: var(--off-white);
+        }
+
+        .services-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+        }
+
+        .service-card {
+            padding: 3rem 2rem;
+            background: var(--white);
+            text-align: center;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: box-shadow 0.4s ease;
+        }
+
+        .service-card:hover {
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+        }
+
+        .service-number {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--gray-lighter);
+            margin-bottom: 2rem;
+        }
+
+        .service-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--black);
+            margin-bottom: 1.5rem;
+        }
+
+        .service-desc {
+            font-size: 0.9rem;
+            color: var(--gray-mid);
+            line-height: 1.8;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            background: var(--white);
+        }
+
+        .portfolio-inner {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .portfolio-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(6, 6, 6, 0.4), transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .portfolio-item:hover::after {
+            opacity: 1;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .testimonials-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonials .section-label {
+            color: var(--gray-mid);
+        }
+
+        .testimonials .section-title {
+            color: var(--white);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+        }
+
+        .testimonial {
+            padding: 3rem;
+            border-left: 1px solid var(--gray-dark);
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        .testimonial-quote {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 300;
+            font-style: italic;
+            line-height: 1.8;
+            color: var(--gray-lighter);
+        }
+
+        .testimonial-quote::before {
+            content: '"';
+            font-size: 4rem;
+            line-height: 0;
+            vertical-align: -0.5em;
+            color: var(--dark-green);
+            margin-right: 0.5rem;
+        }
+
+        /* Developers Section */
+        .developers {
+            background: var(--off-white);
+            padding: 6rem 0;
+            overflow: hidden;
+        }
+
+        .developers-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .developers .section-title {
+            text-align: center;
+        }
+
+        .developers-desc {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            color: var(--gray-mid);
+            font-size: 1rem;
+        }
+
+        .marquee-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding: 2rem 0;
+        }
+
+        .marquee-container::before,
+        .marquee-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 150px;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .marquee-container::before {
+            left: 0;
+            background: linear-gradient(to right, var(--off-white), transparent);
+        }
+
+        .marquee-container::after {
+            right: 0;
+            background: linear-gradient(to left, var(--off-white), transparent);
+        }
+
+        .marquee {
+            display: flex;
+            gap: 5rem;
+            animation: marquee 30s linear infinite;
+        }
+
+        .marquee-item {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 60px;
+            filter: grayscale(100%);
+            opacity: 0.6;
+            transition: all 0.4s ease;
+        }
+
+        .marquee-item:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        .marquee-item img {
+            height: 100%;
+            width: auto;
+            max-width: 140px;
+            object-fit: contain;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 6rem 4rem;
+        }
+
+        .footer-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .footer-brand img {
+            height: 50px;
+            margin-bottom: 2rem;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-brand p {
+            color: var(--gray-mid);
+            font-size: 0.9rem;
+            max-width: 350px;
+            line-height: 1.8;
+        }
+
+        .footer-title {
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gray-mid);
+            margin-bottom: 2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-lighter);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--gray-dark);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            border-color: var(--white);
+            background: var(--white);
+        }
+
+        .social-links img {
+            width: 18px;
+            height: 18px;
+            filter: brightness(0) invert(1);
+            transition: filter 0.3s ease;
+        }
+
+        .social-links a:hover img {
+            filter: brightness(0);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 4rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--charcoal);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--gray-mid);
+            font-size: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            section {
+                padding: 6rem 2rem;
+            }
+
+            .difference-content {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader">
+        <div class="loader-content">
+            <img src="assets/logo.png" alt="Petra Dubai" class="loader-logo">
+            <div class="loader-line"></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <img src="assets/logo.png" alt="Petra Dubai" class="nav-logo">
+        <ul class="nav-links">
+            <li><a href="#difference">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="https://wa.me/971501140972" target="_blank">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="assets/petra_dubai_intro_video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <img src="assets/logo.png" alt="Petra Dubai" class="hero-logo">
+            <h1 class="hero-tagline">
+                <span class="line">Your Gateway to</span>
+                <span class="line">Dubai's Finest Properties</span>
+            </h1>
+            <p class="hero-subtitle">Luxury Real Estate | Investment | Consultancy</p>
+            <a href="https://wa.me/971501140972" target="_blank" class="hero-cta">Get Started</a>
+        </div>
+        <div class="scroll-indicator">
+            <span></span>
+        </div>
+    </section>
+
+    <!-- Difference Section -->
+    <section class="difference" id="difference">
+        <div class="difference-content">
+            <div class="difference-text">
+                <span class="section-label">The Difference</span>
+                <h2 class="section-title">The Difference Petra Creates</h2>
+                <p>You've seen Dubai rise — a city that went from desert sand to global skyline. While most admire it from afar, the most strategic investors quietly own their piece of it.</p>
+                <p>Petra helps European investors not just buy in Dubai — but secure a position in one of the world's fastest-growing luxury markets.</p>
+                <p>This isn't about another unit. It's about expanding your portfolio into a global asset class that merges lifestyle, tax advantage, and capital growth — all in a stable, high-performing economy.</p>
+                <p>Petra's clients aren't chasing short-term gains. They're securing legacy assets that appreciate in value and reputation.</p>
+            </div>
+            <div class="difference-image">
+                <img src="assets/LUMENA_ALTA-16.webp" alt="Dubai Luxury Property">
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="services-inner">
+            <div style="text-align: center; margin-bottom: 5rem;">
+                <span class="section-label">What We Do</span>
+                <h2 class="section-title">Our Services</h2>
+                <p style="color: var(--gray-mid); max-width: 600px; margin: 0 auto;">We provide a full spectrum of real estate services for buyers, sellers, investors, and developers.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-number">01</div>
+                    <h3 class="service-title">Buying</h3>
+                    <p class="service-desc">Bespoke property search, private viewings, and access to exclusive listings.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-number">02</div>
+                    <h3 class="service-title">Selling</h3>
+                    <p class="service-desc">Strategic marketing and premium positioning for maximum value.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-number">03</div>
+                    <h3 class="service-title">Investing</h3>
+                    <p class="service-desc">Tailored investment insights and market analysis to maximize returns.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-number">04</div>
+                    <h3 class="service-title">Development Consultancy</h3>
+                    <p class="service-desc">From concept to completion with the right partners.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="portfolio-inner">
+            <div class="portfolio-header">
+                <span class="section-label">Featured Properties</span>
+                <h2 class="section-title">Our Portfolio</h2>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="assets/LUMENA_ALTA-16.webp" alt="Luxury Property">
+                </div>
+                <div class="portfolio-item">
+                    <img src="assets/Aurea-2.webp" alt="Luxury Property">
+                </div>
+                <div class="portfolio-item">
+                    <img src="assets/page16_image21-1-scaled.jpg" alt="Luxury Property">
+                </div>
+                <div class="portfolio-item">
+                    <img src="assets/page6_image21-1-scaled.jpg" alt="Luxury Property">
+                </div>
+                <div class="portfolio-item">
+                    <img src="assets/img210.jpg" alt="Luxury Property">
+                </div>
+                <div class="portfolio-item">
+                    <img src="assets/img205_1.jpg" alt="Luxury Property">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="testimonials-inner">
+            <div style="text-align: center; margin-bottom: 5rem;">
+                <span class="section-label">Client Stories</span>
+                <h2 class="section-title">What People Say About Us</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <p class="testimonial-quote">From paperwork to negotiations, they take care of the process. I just focus on growing my portfolio. Total lifesaver!</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-quote">I secured my first Dubai off-plan property and saw appreciation within months - without the stress of managing everything myself.</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-quote">As a first-time investor in Dubai, I was nervous. They explained everything clearly and guided me step by step. Couldn't have asked for better support.</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-quote">Exceptional service from start to finish. Petra was always available to answer my questions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Developers Section -->
+    <section class="developers" id="developers">
+        <div class="developers-inner">
+            <span class="section-label" style="text-align: center; display: block;">Trusted Partners</span>
+            <h2 class="section-title">Developers</h2>
+            <p class="developers-desc">We work with Dubai's most reputable master and private developers, including industry leaders like Emaar and Dubai Holding, as well as select boutique developers offering unique and high-quality projects.</p>
+        </div>
+        <div class="marquee-container">
+            <div class="marquee">
+                <div class="marquee-item"><img src="assets/1 - emaar.jpg" alt="Emaar"></div>
+                <div class="marquee-item"><img src="assets/2 - Damac.jpg" alt="Damac"></div>
+                <div class="marquee-item"><img src="assets/3 - sobha.jpg" alt="Sobha"></div>
+                <div class="marquee-item"><img src="assets/4 - Meraas.jpg" alt="Meraas"></div>
+                <div class="marquee-item"><img src="assets/5 - hh.jpg" alt="HH"></div>
+                <div class="marquee-item"><img src="assets/6 - omniyat.jpg" alt="Omniyat"></div>
+                <div class="marquee-item"><img src="assets/7 - Binghatti-Logo.svg" alt="Binghatti"></div>
+                <div class="marquee-item"><img src="assets/8 - nakheel.jpg" alt="Nakheel"></div>
+                <div class="marquee-item"><img src="assets/10 - ellington-logo.jpg" alt="Ellington"></div>
+                <div class="marquee-item"><img src="assets/11 - maf-logo.svg" alt="MAF"></div>
+                <!-- Duplicate for seamless loop -->
+                <div class="marquee-item"><img src="assets/1 - emaar.jpg" alt="Emaar"></div>
+                <div class="marquee-item"><img src="assets/2 - Damac.jpg" alt="Damac"></div>
+                <div class="marquee-item"><img src="assets/3 - sobha.jpg" alt="Sobha"></div>
+                <div class="marquee-item"><img src="assets/4 - Meraas.jpg" alt="Meraas"></div>
+                <div class="marquee-item"><img src="assets/5 - hh.jpg" alt="HH"></div>
+                <div class="marquee-item"><img src="assets/6 - omniyat.jpg" alt="Omniyat"></div>
+                <div class="marquee-item"><img src="assets/7 - Binghatti-Logo.svg" alt="Binghatti"></div>
+                <div class="marquee-item"><img src="assets/8 - nakheel.jpg" alt="Nakheel"></div>
+                <div class="marquee-item"><img src="assets/10 - ellington-logo.jpg" alt="Ellington"></div>
+                <div class="marquee-item"><img src="assets/11 - maf-logo.svg" alt="MAF"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="assets/logo.png" alt="Petra Dubai">
+                <p>Petra helps European investors secure their position in Dubai's fastest-growing luxury real estate market.</p>
+                <div class="social-links">
+                    <a href="https://www.tiktok.com/@petradubaicollection" target="_blank"><img src="assets/tiktok.webp" alt="TikTok"></a>
+                    <a href="https://www.facebook.com/PetraDubaiCollection" target="_blank"><img src="assets/facebook.svg" alt="Facebook"></a>
+                    <a href="https://www.instagram.com/property.by.petra" target="_blank"><img src="assets/instagram.svg" alt="Instagram"></a>
+                    <a href="https://wa.me/971501140972" target="_blank"><img src="assets/whatsapp.svg" alt="WhatsApp"></a>
+                    <a href="mailto:petra@petradubai.ae"><img src="assets/email.svg" alt="Email"></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-title">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#difference">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-title">Contact</h4>
+                <ul class="footer-links">
+                    <li><a href="https://wa.me/971501140972" target="_blank">+971 50 114 0972</a></li>
+                    <li><a href="mailto:petra@petradubai.ae">petra@petradubai.ae</a></li>
+                    <li><a href="https://wa.me/971501140972" target="_blank">WhatsApp Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Petra Dubai. All rights reserved.</p>
+            <p>Dubai, United Arab Emirates</p>
+        </div>
+    </footer>
+
+    <script>
+        // Register GSAP plugins
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Loading animation
+        const loaderTl = gsap.timeline();
+        loaderTl
+            .to('.loader-logo', {
+                opacity: 1,
+                duration: 1,
+                ease: 'power2.out'
+            })
+            .to('.loader-line', {
+                width: '120px',
+                duration: 1.2,
+                ease: 'power2.inOut'
+            }, '-=0.5')
+            .to('.loader-logo', {
+                opacity: 0,
+                y: -20,
+                duration: 0.6,
+                ease: 'power2.in',
+                delay: 0.3
+            })
+            .to('.loader-line', {
+                width: 0,
+                opacity: 0,
+                duration: 0.4,
+                ease: 'power2.in'
+            }, '-=0.4')
+            .to('.loader', {
+                yPercent: -100,
+                duration: 1,
+                ease: 'power4.inOut'
+            })
+            .call(() => {
+                document.querySelector('.loader').style.display = 'none';
+            });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Hero animations (starts after loader)
+        const heroTl = gsap.timeline({ delay: 2.8 });
+        heroTl
+            .to('.hero-logo', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' })
+            .to('.hero-tagline .line', {
+                y: 0,
+                duration: 1.2,
+                stagger: 0.15,
+                ease: 'power4.out'
+            }, '-=0.6')
+            .to('.hero-subtitle', { opacity: 1, duration: 0.8, ease: 'power2.out' }, '-=0.6')
+            .to('.hero-cta', { opacity: 1, duration: 0.8, ease: 'power2.out' }, '-=0.4')
+            .to('.scroll-indicator', { opacity: 1, duration: 0.8, ease: 'power2.out' }, '-=0.2');
+
+        // Section header animations helper
+        function animateSectionHeader(trigger) {
+            gsap.to(trigger.querySelectorAll('.section-label, .section-title'), {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                stagger: 0.15,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: trigger,
+                    start: 'top 75%',
+                }
+            });
+        }
+
+        // Difference section animations
+        animateSectionHeader(document.querySelector('.difference'));
+
+        gsap.to('.difference-text p', {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.difference-text',
+                start: 'top 70%',
+            }
+        });
+
+        gsap.to('.difference-image', {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.difference-image',
+                start: 'top 75%',
+            }
+        });
+
+        // Services section animations
+        animateSectionHeader(document.querySelector('.services'));
+
+        gsap.to('.service-card', {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.12,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.services-grid',
+                start: 'top 70%',
+            }
+        });
+
+        // Portfolio section animations
+        animateSectionHeader(document.querySelector('.portfolio'));
+
+        gsap.to('.portfolio-item', {
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            stagger: 0.1,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.portfolio-grid',
+                start: 'top 70%',
+            }
+        });
+
+        // Testimonials section animations
+        animateSectionHeader(document.querySelector('.testimonials'));
+
+        gsap.to('.testimonial', {
+            opacity: 1,
+            x: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.testimonials-grid',
+                start: 'top 70%',
+            }
+        });
+
+        // Developers section animations
+        animateSectionHeader(document.querySelector('.developers'));
+
+        // Parallax effect on difference image
+        gsap.to('.difference-image img', {
+            yPercent: -10,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.difference-image',
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 1
+            }
+        });
+
+        // Parallax effect on portfolio items
+        document.querySelectorAll('.portfolio-item').forEach((item, i) => {
+            gsap.to(item.querySelector('img'), {
+                yPercent: i % 2 === 0 ? -8 : -12,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 1
+                }
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

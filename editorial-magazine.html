@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petra Dubai | Luxury Real Estate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Sarabun:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #060606;
+            --dark-green: #132116;
+            --charcoal: #222222;
+            --gray-dark: #59595C;
+            --gray-mid: #727476;
+            --gray-light: #C4C4C4;
+            --gray-lighter: #D3D3D3;
+            --off-white: #EAECEE;
+            --cream: #F5F3EF;
+            --white: #FFFFFF;
+            --font-display: 'DM Serif Display', serif;
+            --font-body: 'Sarabun', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-weight: 300;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* Loading Screen */
+        .loader {
+            position: fixed;
+            inset: 0;
+            background: var(--black);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loader-text {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--white);
+            overflow: hidden;
+        }
+
+        .loader-text span {
+            display: inline-block;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            mix-blend-mode: difference;
+        }
+
+        .nav-logo {
+            height: 40px;
+            filter: invert(1);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .nav-cta {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.7rem;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            padding: 0.8rem 1.5rem;
+            border: 1px solid var(--white);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(6, 6, 6, 0.35);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: absolute;
+            z-index: 2;
+            inset: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr auto 1fr;
+        }
+
+        .hero-logo-wrap {
+            grid-column: 1;
+            grid-row: 2;
+            padding-left: 4rem;
+            opacity: 0;
+        }
+
+        .hero-logo-wrap img {
+            height: 60px;
+            filter: brightness(0) invert(1);
+        }
+
+        .hero-title-wrap {
+            grid-column: 2;
+            grid-row: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-right: 4rem;
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(3.5rem, 7vw, 6rem);
+            font-weight: 400;
+            color: var(--white);
+            line-height: 1.05;
+            text-align: right;
+            overflow: hidden;
+        }
+
+        .hero-title span {
+            display: block;
+            transform: translateY(110%);
+        }
+
+        .hero-title em {
+            font-style: italic;
+        }
+
+        .hero-subtitle {
+            text-align: right;
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gray-lighter);
+            opacity: 0;
+        }
+
+        .hero-cta-wrap {
+            grid-column: 1 / -1;
+            grid-row: 3;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding-bottom: 4rem;
+            opacity: 0;
+        }
+
+        .hero-cta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .hero-cta span {
+            font-size: 0.65rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+        }
+
+        .hero-cta-line {
+            width: 1px;
+            height: 60px;
+            background: var(--white);
+            transform-origin: top;
+            animation: growLine 1.5s ease infinite;
+        }
+
+        @keyframes growLine {
+            0%, 100% { transform: scaleY(0); opacity: 0; }
+            50% { transform: scaleY(1); opacity: 1; }
+        }
+
+        /* Editorial Section Layout */
+        .editorial-section {
+            padding: 10rem 0;
+        }
+
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            padding: 0 4rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* Difference Section */
+        .difference {
+            background: var(--cream);
+            padding: 12rem 0;
+            position: relative;
+        }
+
+        .difference::before {
+            content: 'PETRA';
+            position: absolute;
+            top: 50%;
+            left: -5%;
+            transform: translateY(-50%) rotate(-90deg);
+            font-family: var(--font-display);
+            font-size: 15rem;
+            color: var(--black);
+            opacity: 0.03;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .difference-label {
+            grid-column: 1 / 5;
+            padding-top: 3rem;
+        }
+
+        .section-number {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            color: var(--gray-mid);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-label {
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gray-dark);
+        }
+
+        .difference-title {
+            grid-column: 1 / 7;
+            margin-top: 4rem;
+        }
+
+        .difference-title h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            line-height: 1.15;
+            color: var(--black);
+        }
+
+        .difference-title h2 em {
+            font-style: italic;
+            color: var(--dark-green);
+        }
+
+        .difference-content {
+            grid-column: 7 / 12;
+            margin-top: 4rem;
+            padding-left: 2rem;
+        }
+
+        .difference-content p {
+            font-size: 1.05rem;
+            color: var(--gray-dark);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .difference-content p:first-child {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-style: italic;
+            color: var(--charcoal);
+            line-height: 1.6;
+        }
+
+        .difference-image {
+            grid-column: 1 / 6;
+            margin-top: 6rem;
+            position: relative;
+        }
+
+        .difference-image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .difference-image-caption {
+            position: absolute;
+            bottom: -3rem;
+            right: -8rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gray-mid);
+            transform: rotate(-90deg);
+            transform-origin: bottom left;
+        }
+
+        .difference-pull-quote {
+            grid-column: 7 / 12;
+            margin-top: 10rem;
+            padding-left: 3rem;
+            border-left: 2px solid var(--dark-green);
+        }
+
+        .difference-pull-quote p {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-style: italic;
+            line-height: 1.5;
+            color: var(--charcoal);
+            opacity: 0;
+        }
+
+        /* Services Section */
+        .services {
+            background: var(--black);
+            color: var(--white);
+            padding: 12rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .services::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background: var(--dark-green);
+            z-index: 0;
+        }
+
+        .services-inner {
+            position: relative;
+            z-index: 1;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 4rem;
+        }
+
+        .services-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 6rem;
+        }
+
+        .services-header-left {
+            max-width: 600px;
+        }
+
+        .services-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-top: 1.5rem;
+        }
+
+        .services-header-right {
+            text-align: right;
+            color: var(--gray-light);
+            max-width: 350px;
+        }
+
+        .services-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0;
+        }
+
+        .service-item {
+            padding: 4rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: -1px 0 0 -1px;
+            opacity: 0;
+            transform: translateY(40px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), transparent);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .service-item:hover::before {
+            opacity: 1;
+        }
+
+        .service-number {
+            font-family: var(--font-display);
+            font-size: 5rem;
+            color: rgba(255, 255, 255, 0.08);
+            position: absolute;
+            top: 1rem;
+            right: 2rem;
+            line-height: 1;
+        }
+
+        .service-title {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-desc {
+            font-size: 0.95rem;
+            color: var(--gray-light);
+            line-height: 1.9;
+            max-width: 350px;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            background: var(--cream);
+            padding: 12rem 0;
+        }
+
+        .portfolio-header {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 4rem;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 2rem;
+            margin-bottom: 6rem;
+        }
+
+        .portfolio-header-content {
+            grid-column: 1 / 6;
+        }
+
+        .portfolio-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-top: 1.5rem;
+        }
+
+        .portfolio-masonry {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 4rem;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: auto;
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .portfolio-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(6, 6, 6, 0.6), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .portfolio-item:hover::after {
+            opacity: 1;
+        }
+
+        .portfolio-item:nth-child(1) {
+            grid-column: 1 / 5;
+            grid-row: 1 / 2;
+            height: 400px;
+        }
+
+        .portfolio-item:nth-child(2) {
+            grid-column: 5 / 9;
+            grid-row: 1 / 2;
+            height: 400px;
+        }
+
+        .portfolio-item:nth-child(3) {
+            grid-column: 9 / 13;
+            grid-row: 1 / 3;
+            height: calc(800px + 2rem);
+        }
+
+        .portfolio-item:nth-child(4) {
+            grid-column: 1 / 5;
+            grid-row: 2 / 3;
+            height: 400px;
+        }
+
+        .portfolio-item:nth-child(5) {
+            grid-column: 5 / 9;
+            grid-row: 2 / 3;
+            height: 400px;
+        }
+
+        .portfolio-item:nth-child(6) {
+            grid-column: 1 / 7;
+            grid-row: 3 / 4;
+            height: 350px;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background: var(--off-white);
+            padding: 12rem 0;
+            overflow: hidden;
+        }
+
+        .testimonials-inner {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 4rem;
+        }
+
+        .testimonials-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 6rem;
+        }
+
+        .testimonials-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-top: 1.5rem;
+        }
+
+        .testimonials-track {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 3rem;
+            position: relative;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            font-family: var(--font-display);
+            font-size: 8rem;
+            color: var(--off-white);
+            position: absolute;
+            top: 0;
+            right: 1rem;
+            line-height: 1;
+        }
+
+        .testimonial-quote {
+            font-size: 1rem;
+            line-height: 1.9;
+            color: var(--charcoal);
+            position: relative;
+            z-index: 1;
+            margin-bottom: 2rem;
+        }
+
+        .testimonial-line {
+            width: 40px;
+            height: 2px;
+            background: var(--dark-green);
+        }
+
+        /* Developers Section */
+        .developers {
+            background: var(--cream);
+            padding: 8rem 0;
+            overflow: hidden;
+        }
+
+        .developers-inner {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 4rem;
+            margin-bottom: 4rem;
+            text-align: center;
+        }
+
+        .developers h2 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .developers-desc {
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--gray-dark);
+        }
+
+        .marquee-container {
+            position: relative;
+            padding: 3rem 0;
+        }
+
+        .marquee-container::before,
+        .marquee-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 200px;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .marquee-container::before {
+            left: 0;
+            background: linear-gradient(to right, var(--cream), transparent);
+        }
+
+        .marquee-container::after {
+            right: 0;
+            background: linear-gradient(to left, var(--cream), transparent);
+        }
+
+        .marquee {
+            display: flex;
+            gap: 6rem;
+            animation: marquee 40s linear infinite;
+        }
+
+        .marquee-item {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 60px;
+            opacity: 0.5;
+            filter: grayscale(100%);
+            transition: all 0.5s ease;
+        }
+
+        .marquee-item:hover {
+            opacity: 1;
+            filter: grayscale(0%);
+        }
+
+        .marquee-item img {
+            height: 100%;
+            width: auto;
+            max-width: 140px;
+            object-fit: contain;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--dark-green);
+            padding: 10rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.03), transparent 50%);
+            pointer-events: none;
+        }
+
+        .cta-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-inner .section-label {
+            color: var(--gray-light);
+        }
+
+        .cta-inner h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            color: var(--white);
+            margin: 1.5rem 0 2rem;
+            line-height: 1.3;
+        }
+
+        .cta-inner p {
+            color: var(--gray-lighter);
+            margin-bottom: 3rem;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 2.5rem;
+            background: var(--white);
+            color: var(--black);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+        }
+
+        .cta-button:hover {
+            background: var(--cream);
+            gap: 1.5rem;
+        }
+
+        .cta-button svg {
+            width: 16px;
+            transition: transform 0.4s ease;
+        }
+
+        .cta-button:hover svg {
+            transform: translateX(5px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 6rem 4rem 3rem;
+        }
+
+        .footer-inner {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .footer-brand img {
+            height: 45px;
+            margin-bottom: 2rem;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-brand p {
+            color: var(--gray-mid);
+            font-size: 0.95rem;
+            max-width: 300px;
+            line-height: 1.8;
+        }
+
+        .footer-title {
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gray-mid);
+            margin-bottom: 2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-lighter);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border: 1px solid var(--gray-dark);
+            transition: all 0.4s ease;
+        }
+
+        .social-links a:hover {
+            border-color: var(--white);
+            background: var(--white);
+        }
+
+        .social-links img {
+            width: 16px;
+            height: 16px;
+            filter: brightness(0) invert(1);
+            transition: filter 0.3s ease;
+        }
+
+        .social-links a:hover img {
+            filter: brightness(0);
+        }
+
+        .footer-bottom {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding-top: 3rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--charcoal);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--gray-mid);
+            font-size: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .portfolio-masonry {
+                grid-template-columns: repeat(6, 1fr);
+            }
+
+            .portfolio-item:nth-child(1),
+            .portfolio-item:nth-child(2),
+            .portfolio-item:nth-child(4),
+            .portfolio-item:nth-child(5) {
+                grid-column: span 3;
+                height: 300px;
+            }
+
+            .portfolio-item:nth-child(3) {
+                grid-column: span 6;
+                height: 400px;
+            }
+
+            .portfolio-item:nth-child(6) {
+                grid-column: span 6;
+                height: 300px;
+            }
+
+            .testimonials-track {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-inner {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .nav-links, .nav-cta {
+                display: none;
+            }
+
+            .editorial-grid {
+                padding: 0 2rem;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                grid-template-rows: 1fr auto auto 1fr;
+            }
+
+            .hero-logo-wrap {
+                grid-column: 1;
+                grid-row: 2;
+                padding-left: 2rem;
+            }
+
+            .hero-title-wrap {
+                grid-column: 1;
+                grid-row: 3;
+                padding: 2rem;
+            }
+
+            .hero-title {
+                text-align: left;
+            }
+
+            .hero-subtitle {
+                text-align: left;
+            }
+
+            .difference-label,
+            .difference-title,
+            .difference-content,
+            .difference-image,
+            .difference-pull-quote {
+                grid-column: 1 / -1;
+            }
+
+            .difference-content {
+                padding-left: 0;
+                margin-top: 2rem;
+            }
+
+            .difference-pull-quote {
+                margin-top: 4rem;
+            }
+
+            .services-header {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .services-header-right {
+                text-align: left;
+            }
+
+            .services-list {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-header {
+                padding: 0 2rem;
+            }
+
+            .portfolio-header-content {
+                grid-column: 1 / -1;
+            }
+
+            .portfolio-masonry {
+                padding: 0 2rem;
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-item:nth-child(n) {
+                grid-column: 1;
+                height: 300px;
+            }
+
+            .testimonials-track {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader">
+        <div class="loader-text">
+            <span>P</span><span>E</span><span>T</span><span>R</span><span>A</span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <img src="assets/logo.png" alt="Petra Dubai" class="nav-logo">
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="#difference">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+            </ul>
+            <a href="https://wa.me/971501140972" target="_blank" class="nav-cta">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="assets/petra_dubai_intro_video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-logo-wrap">
+                <img src="assets/logo.png" alt="Petra Dubai">
+            </div>
+            <div class="hero-title-wrap">
+                <h1 class="hero-title">
+                    <span>Dubai's Finest</span>
+                    <span><em>Real Estate</em></span>
+                </h1>
+                <p class="hero-subtitle">Luxury Properties & Investments</p>
+            </div>
+            <div class="hero-cta-wrap">
+                <a href="#difference" class="hero-cta">
+                    <span>Discover More</span>
+                    <div class="hero-cta-line"></div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Difference Section -->
+    <section class="difference" id="difference">
+        <div class="editorial-grid">
+            <div class="difference-label">
+                <span class="section-number">01</span>
+                <span class="section-label">The Difference</span>
+            </div>
+            <div class="difference-title">
+                <h2>The Difference<br><em>Petra</em> Creates</h2>
+            </div>
+            <div class="difference-content">
+                <p>You've seen Dubai rise — a city that went from desert sand to global skyline. While most admire it from afar, the most strategic investors quietly own their piece of it.</p>
+                <p>Petra helps European investors not just buy in Dubai — but secure a position in one of the world's fastest-growing luxury markets.</p>
+                <p>This isn't about another unit. It's about expanding your portfolio into a global asset class that merges lifestyle, tax advantage, and capital growth.</p>
+            </div>
+            <div class="difference-image">
+                <img src="assets/LUMENA_ALTA-16.webp" alt="Dubai Luxury Property">
+                <span class="difference-image-caption">Dubai Luxury Living</span>
+            </div>
+            <div class="difference-pull-quote">
+                <p>Petra's clients aren't chasing short-term gains. They're securing legacy assets that appreciate in value and reputation.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="services-inner">
+            <div class="services-header">
+                <div class="services-header-left">
+                    <span class="section-number" style="color: var(--gray-light);">02</span>
+                    <span class="section-label" style="color: var(--gray-light);">Our Services</span>
+                    <h2>Full Spectrum<br>Real Estate Services</h2>
+                </div>
+                <div class="services-header-right">
+                    <p>We provide comprehensive services for buyers, sellers, investors, and developers across Dubai's luxury market.</p>
+                </div>
+            </div>
+            <div class="services-list">
+                <div class="service-item">
+                    <span class="service-number">01</span>
+                    <h3 class="service-title">Buying</h3>
+                    <p class="service-desc">Bespoke property search, private viewings, and access to exclusive listings.</p>
+                </div>
+                <div class="service-item">
+                    <span class="service-number">02</span>
+                    <h3 class="service-title">Selling</h3>
+                    <p class="service-desc">Strategic marketing and premium positioning for maximum value.</p>
+                </div>
+                <div class="service-item">
+                    <span class="service-number">03</span>
+                    <h3 class="service-title">Investing</h3>
+                    <p class="service-desc">Tailored investment insights and market analysis to maximize returns.</p>
+                </div>
+                <div class="service-item">
+                    <span class="service-number">04</span>
+                    <h3 class="service-title">Development Consultancy</h3>
+                    <p class="service-desc">From concept to completion with the right partners.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="portfolio-header">
+            <div class="portfolio-header-content">
+                <span class="section-number">03</span>
+                <span class="section-label">Featured Properties</span>
+                <h2>Our Portfolio</h2>
+            </div>
+        </div>
+        <div class="portfolio-masonry">
+            <div class="portfolio-item">
+                <img src="assets/LUMENA_ALTA-16.webp" alt="Luxury Property">
+            </div>
+            <div class="portfolio-item">
+                <img src="assets/Aurea-2.webp" alt="Luxury Property">
+            </div>
+            <div class="portfolio-item">
+                <img src="assets/page16_image21-1-scaled.jpg" alt="Luxury Property">
+            </div>
+            <div class="portfolio-item">
+                <img src="assets/page6_image21-1-scaled.jpg" alt="Luxury Property">
+            </div>
+            <div class="portfolio-item">
+                <img src="assets/img210.jpg" alt="Luxury Property">
+            </div>
+            <div class="portfolio-item">
+                <img src="assets/img205_1.jpg" alt="Luxury Property">
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="testimonials-inner">
+            <div class="testimonials-header">
+                <div>
+                    <span class="section-number">04</span>
+                    <span class="section-label">Client Stories</span>
+                    <h2>What People<br>Say About Us</h2>
+                </div>
+            </div>
+            <div class="testimonials-track">
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">From paperwork to negotiations, they take care of the process. I just focus on growing my portfolio. Total lifesaver!</p>
+                    <div class="testimonial-line"></div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">I secured my first Dubai off-plan property and saw appreciation within months - without the stress of managing everything myself.</p>
+                    <div class="testimonial-line"></div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">As a first-time investor in Dubai, I was nervous. They explained everything clearly and guided me step by step.</p>
+                    <div class="testimonial-line"></div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">Exceptional service from start to finish. Petra was always available to answer my questions.</p>
+                    <div class="testimonial-line"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Developers Section -->
+    <section class="developers" id="developers">
+        <div class="developers-inner">
+            <span class="section-number">05</span>
+            <span class="section-label">Trusted Partners</span>
+            <h2>Developers</h2>
+            <p class="developers-desc">We work with Dubai's most reputable master and private developers, including industry leaders like Emaar and Dubai Holding.</p>
+        </div>
+        <div class="marquee-container">
+            <div class="marquee">
+                <div class="marquee-item"><img src="assets/1 - emaar.jpg" alt="Emaar"></div>
+                <div class="marquee-item"><img src="assets/2 - Damac.jpg" alt="Damac"></div>
+                <div class="marquee-item"><img src="assets/3 - sobha.jpg" alt="Sobha"></div>
+                <div class="marquee-item"><img src="assets/4 - Meraas.jpg" alt="Meraas"></div>
+                <div class="marquee-item"><img src="assets/5 - hh.jpg" alt="HH"></div>
+                <div class="marquee-item"><img src="assets/6 - omniyat.jpg" alt="Omniyat"></div>
+                <div class="marquee-item"><img src="assets/7 - Binghatti-Logo.svg" alt="Binghatti"></div>
+                <div class="marquee-item"><img src="assets/8 - nakheel.jpg" alt="Nakheel"></div>
+                <div class="marquee-item"><img src="assets/10 - ellington-logo.jpg" alt="Ellington"></div>
+                <div class="marquee-item"><img src="assets/11 - maf-logo.svg" alt="MAF"></div>
+                <!-- Duplicate for seamless loop -->
+                <div class="marquee-item"><img src="assets/1 - emaar.jpg" alt="Emaar"></div>
+                <div class="marquee-item"><img src="assets/2 - Damac.jpg" alt="Damac"></div>
+                <div class="marquee-item"><img src="assets/3 - sobha.jpg" alt="Sobha"></div>
+                <div class="marquee-item"><img src="assets/4 - Meraas.jpg" alt="Meraas"></div>
+                <div class="marquee-item"><img src="assets/5 - hh.jpg" alt="HH"></div>
+                <div class="marquee-item"><img src="assets/6 - omniyat.jpg" alt="Omniyat"></div>
+                <div class="marquee-item"><img src="assets/7 - Binghatti-Logo.svg" alt="Binghatti"></div>
+                <div class="marquee-item"><img src="assets/8 - nakheel.jpg" alt="Nakheel"></div>
+                <div class="marquee-item"><img src="assets/10 - ellington-logo.jpg" alt="Ellington"></div>
+                <div class="marquee-item"><img src="assets/11 - maf-logo.svg" alt="MAF"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-inner">
+            <span class="section-label">Get Started</span>
+            <h2>Ready to Secure Your Piece of Dubai?</h2>
+            <p>Connect with Petra today and take the first step towards owning luxury real estate in one of the world's most dynamic markets.</p>
+            <a href="https://wa.me/971501140972" target="_blank" class="cta-button">
+                Start a Conversation
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="assets/logo.png" alt="Petra Dubai">
+                <p>Petra helps European investors secure their position in Dubai's fastest-growing luxury real estate market.</p>
+                <div class="social-links">
+                    <a href="https://www.tiktok.com/@petradubaicollection" target="_blank"><img src="assets/tiktok.webp" alt="TikTok"></a>
+                    <a href="https://www.facebook.com/PetraDubaiCollection" target="_blank"><img src="assets/facebook.svg" alt="Facebook"></a>
+                    <a href="https://www.instagram.com/property.by.petra" target="_blank"><img src="assets/instagram.svg" alt="Instagram"></a>
+                    <a href="https://wa.me/971501140972" target="_blank"><img src="assets/whatsapp.svg" alt="WhatsApp"></a>
+                    <a href="mailto:petra@petradubai.ae"><img src="assets/email.svg" alt="Email"></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-title">Navigation</h4>
+                <ul class="footer-links">
+                    <li><a href="#difference">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-title">Services</h4>
+                <ul class="footer-links">
+                    <li><a href="#services">Buying</a></li>
+                    <li><a href="#services">Selling</a></li>
+                    <li><a href="#services">Investing</a></li>
+                    <li><a href="#services">Consultancy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-title">Contact</h4>
+                <ul class="footer-links">
+                    <li><a href="https://wa.me/971501140972" target="_blank">+971 50 114 0972</a></li>
+                    <li><a href="mailto:petra@petradubai.ae">petra@petradubai.ae</a></li>
+                    <li><a href="https://wa.me/971501140972" target="_blank">WhatsApp Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Petra Dubai. All rights reserved.</p>
+            <p>Dubai, United Arab Emirates</p>
+        </div>
+    </footer>
+
+    <script>
+        // Register GSAP plugins
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Loading animation
+        const loaderTl = gsap.timeline();
+        loaderTl
+            .from('.loader-text span', {
+                y: 100,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.08,
+                ease: 'power3.out'
+            })
+            .to('.loader-text span', {
+                y: -100,
+                opacity: 0,
+                duration: 0.6,
+                stagger: 0.05,
+                ease: 'power3.in',
+                delay: 0.5
+            })
+            .to('.loader', {
+                yPercent: -100,
+                duration: 1,
+                ease: 'power4.inOut'
+            })
+            .call(() => {
+                document.querySelector('.loader').style.display = 'none';
+            });
+
+        // Hero animations (starts after loader)
+        const heroTl = gsap.timeline({ delay: 2.5 });
+        heroTl
+            .to('.hero-logo-wrap', { opacity: 1, duration: 1, ease: 'power2.out' })
+            .to('.hero-title span', { y: 0, duration: 1.2, stagger: 0.15, ease: 'power4.out' }, '-=0.5')
+            .to('.hero-subtitle', { opacity: 1, duration: 0.8, ease: 'power2.out' }, '-=0.5')
+            .to('.hero-cta-wrap', { opacity: 1, duration: 0.8, ease: 'power2.out' }, '-=0.3');
+
+        // Difference section animations
+        gsap.to('.difference-content p', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            stagger: 0.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.difference-content',
+                start: 'top 70%',
+            }
+        });
+
+        gsap.to('.difference-image img', {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.difference-image',
+                start: 'top 70%',
+            }
+        });
+
+        gsap.to('.difference-pull-quote p', {
+            opacity: 1,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.difference-pull-quote',
+                start: 'top 80%',
+            }
+        });
+
+        // Services animations
+        gsap.to('.service-item', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.services-list',
+                start: 'top 70%',
+            }
+        });
+
+        // Portfolio animations
+        gsap.to('.portfolio-item', {
+            opacity: 1,
+            duration: 1,
+            stagger: 0.1,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.portfolio-masonry',
+                start: 'top 70%',
+            }
+        });
+
+        // Testimonials animations
+        gsap.to('.testimonial-card', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.testimonials-track',
+                start: 'top 70%',
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

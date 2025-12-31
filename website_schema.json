@@ -1,0 +1,50 @@
+{
+  "laboutiquerealestate_color_codes": [
+    {
+      "value": "#060606",
+      "value_citation": "https://www.laboutiquerealestate.com/en/"
+    },
+    {
+      "value": "#132116",
+      "value_citation": "https://www.laboutiquerealestate.com/en/"
+    },
+    {
+      "value": "#222222",
+      "value_citation": "https://www.laboutiquerealestate.com/en/"
+    },
+    {
+      "value": "#59595C",
+      "value_citation": "https://www.laboutiquerealestate.com/en/"
+    },
+    {
+      "value": "#727476",
+      "value_citation": "https://www.laboutiquerealestate.com/en/"
+    },
+    {
+      "value": "#C4C4C4",
+      "value_citation": "https://www.laboutiquerealestate.com/en/"
+    },
+    {
+      "value": "#D3D3D3",
+      "value_citation": "https://www.laboutiquerealestate.com/en/"
+    },
+    {
+      "value": "#EAECEE",
+      "value_citation": "https://www.laboutiquerealestate.com/en/"
+    },
+    {
+      "value": "#FFFFFF",
+      "value_citation": "https://www.laboutiquerealestate.com/en/"
+    }
+  ],
+  "laboutiquerealestate_font_families": [
+    {
+      "value": "Sarabun",
+      "value_citation": "https://www.laboutiquerealestate.com/en/"
+    },
+    {
+      "value": "sans-serif",
+      "value_citation": "https://www.laboutiquerealestate.com/en/"
+    }
+  ]
+}

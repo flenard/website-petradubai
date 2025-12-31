@@ -1,0 +1,23 @@
+# robots.txt for Petra Dubai
+# https://petradubai.ae
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://petradubai.ae/sitemap.xml
+
+# Crawl delay (be nice to the server)
+Crawl-delay: 1
+
+# Block access to development files
+Disallow: /*.md$
+Disallow: /*.csv$
+Disallow: /*.json$
+
+# Block design variant pages (if not needed for SEO)
+# Uncomment if you want to hide these from search engines:
+# Disallow: /bold-immersive.html
+# Disallow: /editorial-magazine.html
+# Disallow: /minimal-clean.html

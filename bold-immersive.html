@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Petra Dubai | Luxury Real Estate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Sarabun:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #060606;
+            --dark-green: #132116;
+            --charcoal: #222222;
+            --gray-dark: #59595C;
+            --gray-mid: #727476;
+            --gray-light: #C4C4C4;
+            --gray-lighter: #D3D3D3;
+            --off-white: #EAECEE;
+            --white: #FFFFFF;
+            --gold: #C9A962;
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Sarabun', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-weight: 300;
+            background: var(--black);
+            color: var(--white);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.15s ease;
+            mix-blend-mode: difference;
+        }
+
+        .cursor.hover {
+            transform: scale(2);
+            background: rgba(201, 169, 98, 0.1);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.5s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(6, 6, 6, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem 4rem;
+        }
+
+        .nav-logo {
+            height: 45px;
+            filter: brightness(0) invert(1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 0.8rem 2rem;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            transform: scale(1.1);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg,
+                rgba(6, 6, 6, 0.7) 0%,
+                rgba(19, 33, 22, 0.5) 50%,
+                rgba(6, 6, 6, 0.8) 100%
+            );
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: absolute;
+            bottom: 15%;
+            left: 4rem;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        .hero-logo {
+            width: 120px;
+            margin-bottom: 2rem;
+            opacity: 0;
+            filter: brightness(0) invert(1);
+        }
+
+        .hero-label {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .hero-title span {
+            display: block;
+            transform: translateY(100%);
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 2.5rem;
+            background: var(--gold);
+            color: var(--black);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.4s ease;
+        }
+
+        .hero-cta:hover {
+            background: var(--white);
+            gap: 1.5rem;
+        }
+
+        .hero-cta svg {
+            width: 20px;
+            transition: transform 0.4s ease;
+        }
+
+        .hero-cta:hover svg {
+            transform: translateX(5px);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            right: 4rem;
+            bottom: 15%;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+        }
+
+        .hero-scroll span {
+            font-size: 0.65rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            writing-mode: vertical-rl;
+            color: var(--gray-light);
+        }
+
+        .hero-scroll-line {
+            width: 1px;
+            height: 80px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            animation: scrollLine 2s infinite;
+        }
+
+        @keyframes scrollLine {
+            0%, 100% { transform: scaleY(0); transform-origin: top; }
+            50% { transform: scaleY(1); transform-origin: top; }
+            51% { transform-origin: bottom; }
+            100% { transform: scaleY(0); transform-origin: bottom; }
+        }
+
+        /* Section Styles */
+        section {
+            position: relative;
+            padding: 12rem 4rem;
+        }
+
+        .section-label {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+        }
+
+        /* Difference Section */
+        .difference {
+            background: var(--black);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .difference-content {
+            padding: 10rem 6rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .difference-text p {
+            font-size: 1.15rem;
+            color: var(--gray-lighter);
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(40px);
+            line-height: 1.9;
+        }
+
+        .difference-text p:first-of-type {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--white);
+        }
+
+        .difference-visual {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .difference-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.2);
+        }
+
+        .difference-visual::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, var(--black), transparent 30%);
+        }
+
+        /* Services Section */
+        .services {
+            background: var(--charcoal);
+            padding: 12rem 4rem;
+        }
+
+        .services-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .services-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 6rem;
+        }
+
+        .services-header p {
+            max-width: 400px;
+            color: var(--gray-light);
+            font-size: 1rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+        }
+
+        .service-card {
+            padding: 3rem;
+            border: 1px solid var(--gray-dark);
+            margin: -1px 0 0 -1px;
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            background: rgba(201, 169, 98, 0.05);
+        }
+
+        .service-icon {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            font-weight: 400;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            opacity: 0.3;
+        }
+
+        .service-title {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-desc {
+            font-size: 0.95rem;
+            color: var(--gray-light);
+            line-height: 1.8;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            background: var(--black);
+            padding: 12rem 0;
+        }
+
+        .portfolio-header {
+            padding: 0 4rem;
+            margin-bottom: 5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            opacity: 0;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to top,
+                rgba(6, 6, 6, 0.8) 0%,
+                transparent 50%,
+                rgba(6, 6, 6, 0.3) 100%
+            );
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .portfolio-item:hover::after {
+            opacity: 1;
+        }
+
+        .portfolio-item-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            z-index: 2;
+            transform: translateY(100%);
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-item:hover .portfolio-item-content {
+            transform: translateY(0);
+        }
+
+        .portfolio-item-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background: var(--dark-green);
+            padding: 12rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials::before {
+            content: '"';
+            position: absolute;
+            top: -100px;
+            right: 10%;
+            font-family: var(--font-display);
+            font-size: 60rem;
+            color: rgba(255, 255, 255, 0.02);
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .testimonials-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonials-header {
+            margin-bottom: 5rem;
+        }
+
+        .testimonials-slider {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+        }
+
+        .testimonial {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .testimonial-quote {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-weight: 400;
+            font-style: italic;
+            line-height: 1.8;
+            color: var(--white);
+            margin-bottom: 2rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .testimonial-quote::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gold);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-author-line {
+            width: 30px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .testimonial-author-name {
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gray-lighter);
+        }
+
+        /* Developers Section */
+        .developers {
+            background: var(--black);
+            padding: 8rem 0;
+            overflow: hidden;
+        }
+
+        .developers-header {
+            text-align: center;
+            padding: 0 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .developers-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--gray-light);
+        }
+
+        .marquee-wrapper {
+            position: relative;
+            padding: 3rem 0;
+        }
+
+        .marquee-wrapper::before,
+        .marquee-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 200px;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .marquee-wrapper::before {
+            left: 0;
+            background: linear-gradient(to right, var(--black), transparent);
+        }
+
+        .marquee-wrapper::after {
+            right: 0;
+            background: linear-gradient(to left, var(--black), transparent);
+        }
+
+        .marquee {
+            display: flex;
+            gap: 6rem;
+            animation: marquee 35s linear infinite;
+        }
+
+        .marquee-item {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 70px;
+            opacity: 0.4;
+            filter: grayscale(100%) brightness(2);
+            transition: all 0.5s ease;
+        }
+
+        .marquee-item:hover {
+            opacity: 1;
+            filter: grayscale(0%) brightness(1);
+        }
+
+        .marquee-item img {
+            height: 100%;
+            width: auto;
+            max-width: 150px;
+            object-fit: contain;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--gold);
+            padding: 10rem 4rem;
+            text-align: center;
+        }
+
+        .cta-section .section-title {
+            color: var(--black);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-section p {
+            color: var(--charcoal);
+            max-width: 500px;
+            margin: 0 auto 3rem;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem 3rem;
+            background: var(--black);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: all 0.4s ease;
+        }
+
+        .cta-button:hover {
+            background: var(--charcoal);
+            gap: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--black);
+            padding: 6rem 4rem 3rem;
+            border-top: 1px solid var(--charcoal);
+        }
+
+        .footer-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .footer-brand img {
+            height: 50px;
+            margin-bottom: 2rem;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-brand p {
+            color: var(--gray-mid);
+            font-size: 0.95rem;
+            max-width: 300px;
+            line-height: 1.8;
+        }
+
+        .footer-title {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--gray-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: var(--charcoal);
+            transition: all 0.4s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--gold);
+        }
+
+        .social-links img {
+            width: 18px;
+            height: 18px;
+            filter: brightness(0) invert(1);
+            transition: filter 0.3s ease;
+        }
+
+        .social-links a:hover img {
+            filter: brightness(0);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 3rem;
+            margin-top: 4rem;
+            border-top: 1px solid var(--charcoal);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--gray-mid);
+            font-size: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-inner {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cursor {
+                display: none;
+            }
+
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .nav-links, .nav-cta {
+                display: none;
+            }
+
+            section {
+                padding: 6rem 2rem;
+            }
+
+            .hero-content {
+                left: 2rem;
+                right: 2rem;
+            }
+
+            .hero-scroll {
+                display: none;
+            }
+
+            .difference {
+                grid-template-columns: 1fr;
+            }
+
+            .difference-content {
+                padding: 6rem 2rem;
+            }
+
+            .difference-visual {
+                height: 50vh;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2rem;
+                padding: 0 2rem;
+            }
+
+            .testimonials-slider {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <img src="assets/logo.png" alt="Petra Dubai" class="nav-logo">
+        <ul class="nav-links">
+            <li><a href="#difference">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+        </ul>
+        <a href="https://wa.me/971501140972" target="_blank" class="nav-cta">Get Started</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="assets/petra_dubai_intro_video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <img src="assets/logo.png" alt="Petra Dubai" class="hero-logo">
+            <p class="hero-label">Luxury Real Estate Dubai</p>
+            <h1 class="hero-title">
+                <span>Where Vision</span>
+                <span>Meets <em>Legacy</em></span>
+            </h1>
+            <a href="https://wa.me/971501140972" target="_blank" class="hero-cta">
+                Start Your Journey
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="hero-scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- Difference Section -->
+    <section class="difference" id="difference">
+        <div class="difference-content">
+            <span class="section-label">The Difference</span>
+            <h2 class="section-title">The Difference<br>Petra Creates</h2>
+            <div class="difference-text">
+                <p>You've seen Dubai rise — a city that went from desert sand to global skyline. While most admire it from afar, the most strategic investors quietly own their piece of it.</p>
+                <p>Petra helps European investors not just buy in Dubai — but secure a position in one of the world's fastest-growing luxury markets.</p>
+                <p>This isn't about another unit. It's about expanding your portfolio into a global asset class that merges lifestyle, tax advantage, and capital growth — all in a stable, high-performing economy.</p>
+                <p>Petra's clients aren't chasing short-term gains. They're securing legacy assets that appreciate in value and reputation.</p>
+            </div>
+        </div>
+        <div class="difference-visual">
+            <img src="assets/Aurea-2.webp" alt="Dubai Luxury Property">
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="services-inner">
+            <div class="services-header">
+                <div>
+                    <span class="section-label">What We Offer</span>
+                    <h2 class="section-title">Our Services</h2>
+                </div>
+                <p>We provide a full spectrum of real estate services for buyers, sellers, investors, and developers.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">01</div>
+                    <h3 class="service-title">Buying</h3>
+                    <p class="service-desc">Bespoke property search, private viewings, and access to exclusive listings.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">02</div>
+                    <h3 class="service-title">Selling</h3>
+                    <p class="service-desc">Strategic marketing and premium positioning for maximum value.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">03</div>
+                    <h3 class="service-title">Investing</h3>
+                    <p class="service-desc">Tailored investment insights and market analysis to maximize returns.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">04</div>
+                    <h3 class="service-title">Development Consultancy</h3>
+                    <p class="service-desc">From concept to completion with the right partners.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="portfolio-header">
+            <div>
+                <span class="section-label">Featured Properties</span>
+                <h2 class="section-title">Our Portfolio</h2>
+            </div>
+        </div>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <img src="assets/LUMENA_ALTA-16.webp" alt="Luxury Property">
+                <div class="portfolio-item-content">
+                    <span class="portfolio-item-label">Exclusive Listing</span>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="assets/Aurea-2.webp" alt="Luxury Property">
+                <div class="portfolio-item-content">
+                    <span class="portfolio-item-label">Premium Collection</span>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="assets/page16_image21-1-scaled.jpg" alt="Luxury Property">
+                <div class="portfolio-item-content">
+                    <span class="portfolio-item-label">Featured Project</span>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="assets/page6_image21-1-scaled.jpg" alt="Luxury Property">
+                <div class="portfolio-item-content">
+                    <span class="portfolio-item-label">New Development</span>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="assets/img210.jpg" alt="Luxury Property">
+                <div class="portfolio-item-content">
+                    <span class="portfolio-item-label">Investment Grade</span>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="assets/img205_1.jpg" alt="Luxury Property">
+                <div class="portfolio-item-content">
+                    <span class="portfolio-item-label">Signature Property</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="testimonials-inner">
+            <div class="testimonials-header">
+                <span class="section-label">Client Stories</span>
+                <h2 class="section-title">What People Say<br>About Us</h2>
+            </div>
+            <div class="testimonials-slider">
+                <div class="testimonial">
+                    <p class="testimonial-quote">From paperwork to negotiations, they take care of the process. I just focus on growing my portfolio. Total lifesaver!</p>
+                    <div class="testimonial-author">
+                        <span class="testimonial-author-line"></span>
+                        <span class="testimonial-author-name">European Investor</span>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-quote">I secured my first Dubai off-plan property and saw appreciation within months - without the stress of managing everything myself.</p>
+                    <div class="testimonial-author">
+                        <span class="testimonial-author-line"></span>
+                        <span class="testimonial-author-name">Property Buyer</span>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-quote">As a first-time investor in Dubai, I was nervous. They explained everything clearly and guided me step by step. Couldn't have asked for better support.</p>
+                    <div class="testimonial-author">
+                        <span class="testimonial-author-line"></span>
+                        <span class="testimonial-author-name">First-Time Investor</span>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-quote">Exceptional service from start to finish. Petra was always available to answer my questions.</p>
+                    <div class="testimonial-author">
+                        <span class="testimonial-author-line"></span>
+                        <span class="testimonial-author-name">Satisfied Client</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Developers Section -->
+    <section class="developers" id="developers">
+        <div class="developers-header">
+            <span class="section-label">Trusted Partners</span>
+            <h2 class="section-title">Developers</h2>
+            <p>We work with Dubai's most reputable master and private developers, including industry leaders like Emaar and Dubai Holding.</p>
+        </div>
+        <div class="marquee-wrapper">
+            <div class="marquee">
+                <div class="marquee-item"><img src="assets/1 - emaar.jpg" alt="Emaar"></div>
+                <div class="marquee-item"><img src="assets/2 - Damac.jpg" alt="Damac"></div>
+                <div class="marquee-item"><img src="assets/3 - sobha.jpg" alt="Sobha"></div>
+                <div class="marquee-item"><img src="assets/4 - Meraas.jpg" alt="Meraas"></div>
+                <div class="marquee-item"><img src="assets/5 - hh.jpg" alt="HH"></div>
+                <div class="marquee-item"><img src="assets/6 - omniyat.jpg" alt="Omniyat"></div>
+                <div class="marquee-item"><img src="assets/7 - Binghatti-Logo.svg" alt="Binghatti"></div>
+                <div class="marquee-item"><img src="assets/8 - nakheel.jpg" alt="Nakheel"></div>
+                <div class="marquee-item"><img src="assets/10 - ellington-logo.jpg" alt="Ellington"></div>
+                <div class="marquee-item"><img src="assets/11 - maf-logo.svg" alt="MAF"></div>
+                <!-- Duplicate for seamless loop -->
+                <div class="marquee-item"><img src="assets/1 - emaar.jpg" alt="Emaar"></div>
+                <div class="marquee-item"><img src="assets/2 - Damac.jpg" alt="Damac"></div>
+                <div class="marquee-item"><img src="assets/3 - sobha.jpg" alt="Sobha"></div>
+                <div class="marquee-item"><img src="assets/4 - Meraas.jpg" alt="Meraas"></div>
+                <div class="marquee-item"><img src="assets/5 - hh.jpg" alt="HH"></div>
+                <div class="marquee-item"><img src="assets/6 - omniyat.jpg" alt="Omniyat"></div>
+                <div class="marquee-item"><img src="assets/7 - Binghatti-Logo.svg" alt="Binghatti"></div>
+                <div class="marquee-item"><img src="assets/8 - nakheel.jpg" alt="Nakheel"></div>
+                <div class="marquee-item"><img src="assets/10 - ellington-logo.jpg" alt="Ellington"></div>
+                <div class="marquee-item"><img src="assets/11 - maf-logo.svg" alt="MAF"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2 class="section-title">Ready to Secure Your Dubai Legacy?</h2>
+        <p>Connect with Petra today and take the first step towards owning your piece of Dubai's future.</p>
+        <a href="https://wa.me/971501140972" target="_blank" class="cta-button">
+            Start a Conversation
+            <svg width="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+        </a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="assets/logo.png" alt="Petra Dubai">
+                <p>Petra helps European investors secure their position in Dubai's fastest-growing luxury real estate market.</p>
+                <div class="social-links">
+                    <a href="https://www.tiktok.com/@petradubaicollection" target="_blank"><img src="assets/tiktok.webp" alt="TikTok"></a>
+                    <a href="https://www.facebook.com/PetraDubaiCollection" target="_blank"><img src="assets/facebook.svg" alt="Facebook"></a>
+                    <a href="https://www.instagram.com/property.by.petra" target="_blank"><img src="assets/instagram.svg" alt="Instagram"></a>
+                    <a href="https://wa.me/971501140972" target="_blank"><img src="assets/whatsapp.svg" alt="WhatsApp"></a>
+                    <a href="mailto:petra@petradubai.ae"><img src="assets/email.svg" alt="Email"></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-title">Navigation</h4>
+                <ul class="footer-links">
+                    <li><a href="#difference">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-title">Services</h4>
+                <ul class="footer-links">
+                    <li><a href="#services">Buying</a></li>
+                    <li><a href="#services">Selling</a></li>
+                    <li><a href="#services">Investing</a></li>
+                    <li><a href="#services">Consultancy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4 class="footer-title">Contact</h4>
+                <ul class="footer-links">
+                    <li><a href="https://wa.me/971501140972" target="_blank">+971 50 114 0972</a></li>
+                    <li><a href="mailto:petra@petradubai.ae">petra@petradubai.ae</a></li>
+                    <li><a href="https://wa.me/971501140972" target="_blank">WhatsApp Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Petra Dubai. All rights reserved.</p>
+            <p>Dubai, United Arab Emirates</p>
+        </div>
+    </footer>
+
+    <script>
+        // Register GSAP plugins
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Custom cursor
+        const cursor = document.querySelector('.cursor');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            cursorX += (mouseX - cursorX) * 0.1;
+            cursorY += (mouseY - cursorY) * 0.1;
+            cursor.style.left = cursorX - 10 + 'px';
+            cursor.style.top = cursorY - 10 + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Hero animations
+        const heroTl = gsap.timeline({ delay: 0.5 });
+        heroTl
+            .to('.hero-logo', { opacity: 1, duration: 1, ease: 'power3.out' })
+            .to('.hero-label', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.5')
+            .to('.hero-title span', { y: 0, duration: 1.2, stagger: 0.15, ease: 'power4.out' }, '-=0.5')
+            .to('.hero-cta', { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, '-=0.5')
+            .to('.hero-scroll', { opacity: 1, duration: 0.8, ease: 'power3.out' }, '-=0.3');
+
+        // Hero video parallax
+        gsap.to('.hero-video', {
+            scale: 1,
+            scrollTrigger: {
+                trigger: '.hero',
+                start: 'top top',
+                end: 'bottom top',
+                scrub: 1.5
+            }
+        });
+
+        // Difference section parallax
+        gsap.to('.difference-visual img', {
+            scale: 1,
+            scrollTrigger: {
+                trigger: '.difference',
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 1.5
+            }
+        });
+
+        gsap.to('.difference-text p', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            stagger: 0.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.difference-content',
+                start: 'top 60%',
+            }
+        });
+
+        // Services animations
+        gsap.to('.service-card', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.services-grid',
+                start: 'top 70%',
+            }
+        });
+
+        // Portfolio animations
+        gsap.to('.portfolio-item', {
+            opacity: 1,
+            duration: 1,
+            stagger: 0.1,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.portfolio-grid',
+                start: 'top 70%',
+            }
+        });
+
+        // Testimonials animations
+        gsap.to('.testimonial', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            stagger: 0.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.testimonials-slider',
+                start: 'top 70%',
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
