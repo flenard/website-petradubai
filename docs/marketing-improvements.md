@@ -28,6 +28,24 @@ This document tracks marketing recommendations for the Petra Dubai website, orga
 
 ## 🔴 High Priority (To Do)
 
+### 0. Create og-image.jpg for Social Sharing
+**Impact**: Critical for social media sharing
+**Effort**: Quick (30 minutes)
+
+The Open Graph meta tags reference `assets/og-image.jpg` but this file doesn't exist. Without it, social shares will show a broken/missing image.
+
+**Requirements**:
+- Size: 1200x630 pixels (Facebook/LinkedIn optimal)
+- Format: JPG
+- Content: Hero image with Petra Dubai branding/logo overlay
+
+**Action Items**:
+- [ ] Create og-image.jpg (1200x630px)
+- [ ] Save to `/assets/og-image.jpg`
+- [ ] Test social sharing on Facebook Sharing Debugger
+
+---
+
 ### 1. Add Lead Magnet Popup
 **Impact**: +20-30% lead capture  
 **Effort**: Medium (2-3 hours)

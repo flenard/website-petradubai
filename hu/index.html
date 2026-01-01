@@ -28,6 +28,11 @@
     <meta name="twitter:title" content="Petra Dubai | Luxus ingatlanok">
     <meta name="twitter:description" content="Az Ön kapuja Dubaj legkiválóbb ingatlanjaihoz magyar befektetőknek.">
 
+    <!-- Hreflang for multilingual SEO -->
+    <link rel="alternate" hreflang="en" href="https://petradubai.ae/">
+    <link rel="alternate" hreflang="hu" href="https://petradubai.ae/hu/">
+    <link rel="alternate" hreflang="x-default" href="https://petradubai.ae/">
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="../assets/logo.png">
     <link rel="apple-touch-icon" href="../assets/logo.png">
@@ -36,6 +41,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://wa.me">
 
     <!-- Fonts with swap for faster rendering -->
     <link
@@ -44,6 +50,34 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="../css/styles.css">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "RealEstateAgent",
+        "name": "Petra Dubai",
+        "description": "Luxus ingatlanirodaként segítünk a magyar befektetőknek prémium ingatlanokat vásárolni Dubajban.",
+        "url": "https://petradubai.ae/hu/",
+        "logo": "https://petradubai.ae/assets/logo.png",
+        "telephone": "+971501140972",
+        "email": "petra@petradubai.ae",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Dubai",
+            "addressCountry": "AE"
+        },
+        "areaServed": {
+            "@type": "City",
+            "name": "Dubai"
+        },
+        "sameAs": [
+            "https://www.instagram.com/property.by.petra",
+            "https://www.facebook.com/PetraDubaiCollection",
+            "https://www.tiktok.com/@petradubaicollection"
+        ]
+    }
+    </script>
 </head>
 
 <body>
@@ -87,7 +121,7 @@
     <section class="hero" id="main-content">
         <video class="hero-video" autoplay muted loop playsinline preload="metadata"
             poster="../assets/LUMENA_ALTA-16.webp">
-            <source src="../assets/petra_dubai_intro_video.mp4" type="video/mp4">
+            <source src="../assets/petra_dubai_intro_video.mp4" type="video/mp4" fetchpriority="high">
             A böngészője nem támogatja a videó taget.
         </video>
         <div class="hero-overlay"></div>
@@ -175,42 +209,42 @@
                 <h2 class="section-title">Portfóliónk</h2>
             </div>
             <div class="portfolio-grid">
-                <article class="portfolio-item">
+                <article class="portfolio-item" tabindex="0" role="button" aria-label="Exkluzív ajánlat megtekintése - Modern luxuslakás panorámás Dubai Marina kilátással">
                     <img src="../assets/LUMENA_ALTA-16.webp" alt="Modern luxuslakás panorámás Dubai Marina kilátással"
                         width="600" height="450" loading="lazy">
                     <div class="portfolio-item-content">
                         <span class="portfolio-item-label">Exkluzív ajánlat</span>
                     </div>
                 </article>
-                <article class="portfolio-item">
+                <article class="portfolio-item" tabindex="0" role="button" aria-label="Prémium gyűjtemény megtekintése - Prémium villa privát medencével a Palm Jumeirah-n">
                     <img src="../assets/Aurea-2.webp" alt="Prémium villa privát medencével a Palm Jumeirah-n"
                         width="600" height="450" loading="lazy">
                     <div class="portfolio-item-content">
                         <span class="portfolio-item-label">Prémium gyűjtemény</span>
                     </div>
                 </article>
-                <article class="portfolio-item">
+                <article class="portfolio-item" tabindex="0" role="button" aria-label="Kiemelt projekt megtekintése - Exkluzív penthouse kilátással Downtown Dubajra">
                     <img src="../assets/page16_image21-1-scaled.jpg"
                         alt="Exkluzív penthouse kilátással Downtown Dubajra" width="600" height="450" loading="lazy">
                     <div class="portfolio-item-content">
                         <span class="portfolio-item-label">Kiemelt projekt</span>
                     </div>
                 </article>
-                <article class="portfolio-item">
+                <article class="portfolio-item" tabindex="0" role="button" aria-label="Új fejlesztés megtekintése - Vízparti ingatlan a Dubai Creek Harbour-ban">
                     <img src="../assets/page6_image21-1-scaled.jpg" alt="Vízparti ingatlan a Dubai Creek Harbour-ban"
                         width="600" height="450" loading="lazy">
                     <div class="portfolio-item-content">
                         <span class="portfolio-item-label">Új fejlesztés</span>
                     </div>
                 </article>
-                <article class="portfolio-item">
+                <article class="portfolio-item" tabindex="0" role="button" aria-label="Befektetési kategória megtekintése - Kortárs lakás a Business Bay-ben">
                     <img src="../assets/img210.jpg" alt="Kortárs lakás a Business Bay-ben" width="600" height="450"
                         loading="lazy">
                     <div class="portfolio-item-content">
                         <span class="portfolio-item-label">Befektetési kategória</span>
                     </div>
                 </article>
-                <article class="portfolio-item">
+                <article class="portfolio-item" tabindex="0" role="button" aria-label="Egyedi ingatlan megtekintése - Luxus rezidencia Emirates Hills-ben">
                     <img src="../assets/img205_1.jpg" alt="Luxus rezidencia Emirates Hills-ben" width="600" height="450"
                         loading="lazy">
                     <div class="portfolio-item-content">

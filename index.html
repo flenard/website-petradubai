@@ -28,6 +28,11 @@
     <meta name="twitter:title" content="Petra Dubai | Luxury Real Estate">
     <meta name="twitter:description" content="Your gateway to Dubai's finest properties for European investors.">
 
+    <!-- Hreflang for multilingual SEO -->
+    <link rel="alternate" hreflang="en" href="https://petradubai.ae/">
+    <link rel="alternate" hreflang="hu" href="https://petradubai.ae/hu/">
+    <link rel="alternate" hreflang="x-default" href="https://petradubai.ae/">
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="assets/logo.png">
     <link rel="apple-touch-icon" href="assets/logo.png">
@@ -36,6 +41,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://wa.me">
 
     <!-- Fonts with swap for faster rendering -->
     <link
@@ -44,6 +50,34 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "RealEstateAgent",
+        "name": "Petra Dubai",
+        "description": "Luxury real estate brokerage helping European investors secure premium properties in Dubai.",
+        "url": "https://petradubai.ae",
+        "logo": "https://petradubai.ae/assets/logo.png",
+        "telephone": "+971501140972",
+        "email": "petra@petradubai.ae",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Dubai",
+            "addressCountry": "AE"
+        },
+        "areaServed": {
+            "@type": "City",
+            "name": "Dubai"
+        },
+        "sameAs": [
+            "https://www.instagram.com/property.by.petra",
+            "https://www.facebook.com/PetraDubaiCollection",
+            "https://www.tiktok.com/@petradubaicollection"
+        ]
+    }
+    </script>
 </head>
 
 <body>
@@ -87,7 +121,7 @@
     <section class="hero" id="main-content">
         <video class="hero-video" autoplay muted loop playsinline preload="metadata"
             poster="assets/LUMENA_ALTA-16.webp">
-            <source src="assets/petra_dubai_intro_video.mp4" type="video/mp4">
+            <source src="assets/petra_dubai_intro_video.mp4" type="video/mp4" fetchpriority="high">
             Your browser does not support the video tag.
         </video>
         <div class="hero-overlay"></div>
@@ -171,7 +205,7 @@
                 <h2 class="section-title">Our Portfolio</h2>
             </div>
             <div class="portfolio-grid">
-                <article class="portfolio-item">
+                <article class="portfolio-item" tabindex="0" role="button" aria-label="View Exclusive Listing - Modern luxury apartment with panoramic Dubai Marina views">
                     <img src="assets/LUMENA_ALTA-16.webp"
                         alt="Modern luxury apartment with panoramic Dubai Marina views" width="600" height="450"
                         loading="lazy">
@@ -179,35 +213,35 @@
                         <span class="portfolio-item-label">Exclusive Listing</span>
                     </div>
                 </article>
-                <article class="portfolio-item">
+                <article class="portfolio-item" tabindex="0" role="button" aria-label="View Premium Collection - Premium villa with private pool in Palm Jumeirah">
                     <img src="assets/Aurea-2.webp" alt="Premium villa with private pool in Palm Jumeirah" width="600"
                         height="450" loading="lazy">
                     <div class="portfolio-item-content">
                         <span class="portfolio-item-label">Premium Collection</span>
                     </div>
                 </article>
-                <article class="portfolio-item">
+                <article class="portfolio-item" tabindex="0" role="button" aria-label="View Featured Project - Exclusive penthouse overlooking Downtown Dubai">
                     <img src="assets/page16_image21-1-scaled.jpg" alt="Exclusive penthouse overlooking Downtown Dubai"
                         width="600" height="450" loading="lazy">
                     <div class="portfolio-item-content">
                         <span class="portfolio-item-label">Featured Project</span>
                     </div>
                 </article>
-                <article class="portfolio-item">
+                <article class="portfolio-item" tabindex="0" role="button" aria-label="View New Development - Waterfront property in Dubai Creek Harbour">
                     <img src="assets/page6_image21-1-scaled.jpg" alt="Waterfront property in Dubai Creek Harbour"
                         width="600" height="450" loading="lazy">
                     <div class="portfolio-item-content">
                         <span class="portfolio-item-label">New Development</span>
                     </div>
                 </article>
-                <article class="portfolio-item">
+                <article class="portfolio-item" tabindex="0" role="button" aria-label="View Investment Grade - Contemporary apartment in Business Bay">
                     <img src="assets/img210.jpg" alt="Contemporary apartment in Business Bay" width="600" height="450"
                         loading="lazy">
                     <div class="portfolio-item-content">
                         <span class="portfolio-item-label">Investment Grade</span>
                     </div>
                 </article>
-                <article class="portfolio-item">
+                <article class="portfolio-item" tabindex="0" role="button" aria-label="View Signature Property - Luxury residence in Emirates Hills">
                     <img src="assets/img205_1.jpg" alt="Luxury residence in Emirates Hills" width="600" height="450"
                         loading="lazy">
                     <div class="portfolio-item-content">

@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initDynamicYear();
     initEmailProtection();
     initLanguageDetection();
+    initVideoVisibility();
 });
 
 /* ========================================
@@ -96,6 +97,7 @@ function initMobileMenu() {
     const menuBtn = document.getElementById('mobileMenuBtn');
     const navLinks = document.getElementById('navLinks');
     const navOverlay = document.getElementById('navOverlay');
+    const langSelector = document.querySelector('.lang-selector');
 
     if (!menuBtn || !navLinks) return;
 
@@ -105,6 +107,7 @@ function initMobileMenu() {
         menuBtn.classList.toggle('active');
         navLinks.classList.toggle('active');
         if (navOverlay) navOverlay.classList.toggle('active');
+        if (langSelector) langSelector.classList.toggle('active');
 
         // Update ARIA
         menuBtn.setAttribute('aria-expanded', !isOpen);
@@ -117,6 +120,7 @@ function initMobileMenu() {
         menuBtn.classList.remove('active');
         navLinks.classList.remove('active');
         if (navOverlay) navOverlay.classList.remove('active');
+        if (langSelector) langSelector.classList.remove('active');
         menuBtn.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
     }
@@ -422,13 +426,24 @@ function initSmoothScroll() {
 function initLanguageDetection() {
     const currentPath = window.location.pathname;
     const isHungarianPage = currentPath.includes('/hu/');
-    const preferredLang = localStorage.getItem('petra-lang-pref');
+
+    // Safe localStorage access (may throw in private browsing)
+    let preferredLang = null;
+    try {
+        preferredLang = localStorage.getItem('petra-lang-pref');
+    } catch (e) {
+        // localStorage not available
+    }
 
     // Language switcher handling - save preference when user clicks
     document.querySelectorAll('.lang-link').forEach(link => {
-        link.addEventListener('click', (e) => {
+        link.addEventListener('click', () => {
             const isHuLink = link.getAttribute('aria-label') === 'Magyar';
-            localStorage.setItem('petra-lang-pref', isHuLink ? 'hu' : 'en');
+            try {
+                localStorage.setItem('petra-lang-pref', isHuLink ? 'hu' : 'en');
+            } catch (e) {
+                // localStorage not available
+            }
         });
     });
 
@@ -437,8 +452,8 @@ function initLanguageDetection() {
         const browserLang = (navigator.languages && navigator.languages[0]) || navigator.language || navigator.userLanguage;
 
         if (browserLang && (browserLang.toLowerCase().startsWith('hu'))) {
-            // Check if we are on index.html or root to avoid complex path logic
-            const isRoot = currentPath === '/' || currentPath.endsWith('index.html');
+            // Check if we are on index.html or root - be specific to avoid matching other paths
+            const isRoot = currentPath === '/' || currentPath === '/index.html' || currentPath.endsWith('/index.html') && !currentPath.includes('/hu/');
             if (isRoot) {
                 // Determine redirect path (handles local file testing and server)
                 const redirectPath = currentPath.endsWith('index.html') ? 'hu/index.html' : 'hu/';
@@ -446,4 +461,22 @@ function initLanguageDetection() {
             }
         }
     }
+}
+
+/* ========================================
+   Video Visibility Handler (Performance)
+   ======================================== */
+function initVideoVisibility() {
+    const video = document.querySelector('.hero-video');
+    if (!video) return;
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            video.pause();
+        } else {
+            video.play().catch(() => {
+                // Autoplay may be blocked, that's okay
+            });
+        }
+    });
 }

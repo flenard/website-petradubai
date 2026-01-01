@@ -10,6 +10,7 @@ Petra Dubai is a luxury real estate website for a Dubai-based property brokerage
 
 ### Main Site (Optimized)
 - `index.html` - Main site with external CSS/JS, SEO optimized, accessible
+- `/hu/index.html` - Hungarian language version (mirrors main site structure)
 - `/css/styles.css` - Main stylesheet with design system and responsive breakpoints
 - `/js/main.js` - GSAP animations with error handling and reduced motion support
 
@@ -22,7 +23,7 @@ These are alternate designs with inline CSS/JS for comparison:
 ### Shared Elements Across All Versions
 - Hero section with video background (`assets/petra_dubai_intro_video.mp4`)
 - Navigation with logo and anchor links
-- Sections: About, Services, Portfolio, Testimonials, Developers marquee, Footer
+- Sections: About, Services, Portfolio, Testimonials, FAQ, Developers marquee, Footer
 - GSAP + ScrollTrigger for animations
 - Responsive breakpoints at 1200px and 768px
 
@@ -39,6 +40,11 @@ Color palette:
 - Developer partner logos: Emaar, Damac, Sobha, Meraas, HH, Omniyat, Binghatti, Nakheel, Ellington, MAF
 - Content source data in `webiste-text.csv`
 
+### SEO Files
+- `sitemap.xml` - XML sitemap for search engines
+- `robots.txt` - Crawler instructions
+- `llms.txt` - AI/LLM crawler information (llmstxt.org format)
+
 ## Development
 
 ### Local Preview
@@ -51,6 +57,18 @@ Open `index.html` directly in a browser - no build process required.
 ### Contact Integration
 - WhatsApp: `https://wa.me/971501140972`
 - Email: `petra@petradubai.ae`
+
+### Email Obfuscation Pattern
+Emails use data attributes to prevent spam scraping:
+```html
+<a class="email-link" data-user="petra" data-domain="petradubai.ae">
+```
+JavaScript in `main.js` (`initEmailProtection()`) assembles these at runtime.
+
+### Language Detection
+- Auto-redirects Hungarian browsers to `/hu/` on first visit (no preference stored)
+- Language preference saved to localStorage when user clicks language switcher
+- See `initLanguageDetection()` in `main.js`
 
 ## Optimizations Implemented
 
@@ -85,3 +103,7 @@ Open `index.html` directly in a browser - no build process required.
 - Error handling for GSAP loading
 - Null checks on DOM elements
 - Dynamic copyright year
+
+## Documentation
+
+- `docs/marketing-improvements.md` - Marketing roadmap with completed items and to-do priorities
