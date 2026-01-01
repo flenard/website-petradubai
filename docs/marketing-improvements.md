@@ -12,6 +12,7 @@ This document tracks marketing recommendations for the Petra Dubai website, orga
 |----------------|------|-------|
 | Unified CTAs ("Book a Call") | Dec 30, 2024 | All CTAs now consistent |
 | Pre-filled WhatsApp message | Dec 30, 2024 | Qualifies intent immediately |
+| 5-Star Reviews | Jan 01, 2026 | Added gold 5-star ratings to all testimonials |
 | High-converting headline | Dec 30, 2024 | "8-12% Rental Yields. Zero Income Tax. Golden Visa Included." |
 | Email obfuscation (anti-spam) | Dec 30, 2024 | JS-based protection |
 | Darker video overlay | Dec 30, 2024 | Better text contrast |
@@ -93,9 +94,11 @@ Essential for measuring performance and running retargeting ads.
 
 ---
 
-### 4. Upgrade Testimonials
+### 4. Upgrade Testimonials (Partially Done)
 **Impact**: +40% trust  
 **Effort**: Medium (requires client photos)
+
+**Status**: Added 5-star ratings (Jan 1, 2026). Still need client photos and specific ROI data.
 
 Current testimonials lack social proof depth. Upgrade to include:
 - Client photos (or initials if privacy needed)

@@ -179,30 +179,30 @@ function initAnimations() {
    Hero Animations
    ======================================== */
 function initHeroAnimations() {
-    const heroTl = gsap.timeline({ delay: 0.3 });
+    const heroTl = gsap.timeline({ delay: 0.5 });
 
     heroTl
         .to('.hero-tagline .line', {
             y: 0,
-            duration: 1.2,
-            stagger: 0.15,
+            duration: 1.5,
+            stagger: 0.2,
             ease: 'power4.out'
         })
         .to('.hero-subtitle', {
             opacity: 1,
-            duration: 0.8,
+            duration: 1.2,
             ease: 'power2.out'
-        }, '-=0.6')
+        }, '-=0.8')
         .to('.hero-cta', {
             opacity: 1,
-            duration: 0.8,
+            duration: 1.2,
             ease: 'power2.out'
-        }, '-=0.4')
+        }, '-=0.6')
         .to('.scroll-indicator', {
             opacity: 1,
-            duration: 0.8,
+            duration: 1.2,
             ease: 'power2.out'
-        }, '-=0.2');
+        }, '-=0.4');
 }
 
 /* ========================================
@@ -214,12 +214,12 @@ function animateSectionHeader(trigger) {
     gsap.to(trigger.querySelectorAll('.section-label, .section-title'), {
         opacity: 1,
         y: 0,
-        duration: 0.8,
-        stagger: 0.15,
+        duration: 1.2,
+        stagger: 0.2,
         ease: 'power3.out',
         scrollTrigger: {
             trigger: trigger,
-            start: 'top 75%',
+            start: 'top 80%',
         }
     });
 }
@@ -236,23 +236,23 @@ function initSectionAnimations() {
         gsap.to('.difference-text p', {
             opacity: 1,
             y: 0,
-            duration: 0.8,
-            stagger: 0.15,
+            duration: 1.2,
+            stagger: 0.2,
             ease: 'power3.out',
             scrollTrigger: {
                 trigger: '.difference-text',
-                start: 'top 70%',
+                start: 'top 75%',
             }
         });
 
         gsap.to('.difference-image', {
             opacity: 1,
             y: 0,
-            duration: 1.2,
+            duration: 1.5,
             ease: 'power3.out',
             scrollTrigger: {
                 trigger: '.difference-image',
-                start: 'top 75%',
+                start: 'top 80%',
             }
         });
     }
