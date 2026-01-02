@@ -1290,7 +1290,7 @@ footer {
         right: 0;
         width: 100%;
         height: 100vh;
-        background: rgba(6, 6, 6, 0.98);
+        background: var(--black);
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -1329,13 +1329,17 @@ footer {
     /* Hide language selector from mobile nav bar */
     .lang-selector {
         position: fixed;
-        bottom: 4rem;
+        bottom: 6rem;
+        top: auto !important;
         left: 50%;
         transform: translateX(-50%);
         z-index: 1000;
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.3s ease, visibility 0.3s ease;
+        background: var(--black);
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
     }
 
     /* Show language selector when menu is open */
