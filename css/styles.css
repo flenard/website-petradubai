@@ -1266,6 +1266,13 @@ footer {
         filter: brightness(0) saturate(100%) invert(73%) sepia(28%) saturate(546%) hue-rotate(7deg) brightness(89%) contrast(88%);
     }
 
+    /* Make nav dark by default on mobile */
+    nav {
+        background: rgba(6, 6, 6, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+    }
+
     nav.scrolled .nav-logo {
         filter: brightness(0) saturate(100%) invert(73%) sepia(28%) saturate(546%) hue-rotate(7deg) brightness(89%) contrast(88%);
     }
@@ -1319,27 +1326,30 @@ footer {
         color: var(--black) !important;
     }
 
-    /* Hide desktop language selector and show in mobile menu */
+    /* Language selector visible in nav on mobile */
     .lang-selector {
-        position: fixed;
-        bottom: 2rem;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 1000;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
-
-    .nav-links.active~.lang-selector,
-    .lang-selector.active {
+        position: static;
+        margin-left: auto;
+        margin-right: 1rem;
+        z-index: 1001;
         opacity: 1;
         visibility: visible;
     }
 
     .lang-link {
         color: var(--white);
-        font-size: 0.9rem;
+        font-size: 0.85rem;
+        opacity: 0.8;
+    }
+
+    .lang-link.active {
+        color: var(--gold);
+        opacity: 1;
+    }
+
+    .lang-divider {
+        color: var(--white);
+        opacity: 0.5;
     }
 
     .lang-divider {
