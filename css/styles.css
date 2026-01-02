@@ -1270,11 +1270,12 @@ footer {
         filter: brightness(0) saturate(100%) invert(73%) sepia(28%) saturate(546%) hue-rotate(7deg) brightness(89%) contrast(88%);
     }
 
-    /* Make nav dark by default on mobile */
+    /* Make nav dark by default on mobile - disable blend mode */
     nav {
         background: rgba(6, 6, 6, 0.95);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
+        mix-blend-mode: normal;
     }
 
     nav.scrolled .nav-logo {
@@ -1286,7 +1287,7 @@ footer {
         display: flex;
     }
 
-    /* Mobile menu overlay - iOS Safari/WebKit compatible solid black */
+    /* Mobile menu overlay - iOS Safari/WebKit/Brave bulletproof solid black */
     .nav-links {
         position: fixed;
         top: 0;
@@ -1295,8 +1296,13 @@ footer {
         bottom: 0;
         width: 100%;
         height: 100vh;
+        height: 100dvh;
         height: -webkit-fill-available;
+        /* Multiple background fallbacks for iOS */
+        background: #060606 !important;
         background-color: #060606 !important;
+        /* Prevent any blending or transparency */
+        mix-blend-mode: normal !important;
         -webkit-transform: translateZ(0);
         transform: translateZ(0);
         flex-direction: column;
@@ -1341,10 +1347,11 @@ footer {
         z-index: 1;
     }
 
-    /* CRITICAL: Remove backdrop-filter when menu is open to prevent iOS rendering bugs */
+    /* CRITICAL: Fix iOS menu background - remove blend mode and backdrop effects */
     /* Using both :has() for modern browsers and .menu-open class as JS fallback */
     nav:has(.nav-links.active),
     nav.menu-open {
+        mix-blend-mode: normal !important;
         backdrop-filter: none !important;
         -webkit-backdrop-filter: none !important;
         background: transparent !important;
