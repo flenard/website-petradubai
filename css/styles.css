@@ -110,12 +110,12 @@ nav.scrolled {
 .nav-logo {
     height: 40px;
     width: auto;
-    filter: invert(1);
+    filter: brightness(0) saturate(100%) invert(73%) sepia(28%) saturate(546%) hue-rotate(7deg) brightness(89%) contrast(88%);
     transition: filter 0.3s ease;
 }
 
 nav.scrolled .nav-logo {
-    filter: invert(0);
+    filter: brightness(0) saturate(100%) invert(73%) sepia(28%) saturate(546%) hue-rotate(7deg) brightness(89%) contrast(88%);
 }
 
 .nav-links {
@@ -1419,6 +1419,20 @@ footer {
 
     .testimonial {
         padding: 2rem;
+    }
+
+    /* Developer logos - smaller and faster scroll on mobile */
+    .marquee {
+        gap: 2rem;
+        animation: marquee 10s linear infinite;
+    }
+
+    .marquee-item {
+        height: 40px;
+    }
+
+    .marquee-item img {
+        max-width: 80px;
     }
 
     .footer-inner {
