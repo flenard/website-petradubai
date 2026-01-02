@@ -1293,15 +1293,11 @@ footer {
         left: 0;
         right: 0;
         bottom: 0;
-        /* Ensure full coverage on iOS */
         width: 100%;
         height: 100vh;
         height: -webkit-fill-available;
-        /* iOS viewport fix */
         background-color: #060606 !important;
-        /* Use background-color, not shorthand */
         -webkit-transform: translateZ(0);
-        /* Force GPU layer on iOS */
         transform: translateZ(0);
         flex-direction: column;
         justify-content: center;
@@ -1312,6 +1308,11 @@ footer {
         padding: 4rem 2rem;
         opacity: 0;
         visibility: hidden;
+        /* iOS stacking context fixes */
+        isolation: isolate;
+        will-change: transform, opacity;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
     }
 
     .nav-links.active {
@@ -1327,8 +1328,17 @@ footer {
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: #060606;
-        z-index: -1;
+        width: 100%;
+        height: 100%;
+        background-color: #060606 !important;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    /* Ensure all nav-links content is above the ::before */
+    .nav-links>* {
+        position: relative;
+        z-index: 1;
     }
 
     /* CRITICAL: Remove backdrop-filter when menu is open to prevent iOS rendering bugs */
