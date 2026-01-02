@@ -1326,20 +1326,34 @@ footer {
         color: var(--black) !important;
     }
 
-    /* Language selector visible in nav on mobile */
+    /* Hide language selector from mobile nav bar */
     .lang-selector {
-        position: static;
-        margin-left: auto;
-        margin-right: 1rem;
-        z-index: 1001;
+        position: fixed;
+        bottom: 4rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    /* Show language selector when menu is open */
+    .nav-links.active~.lang-selector {
         opacity: 1;
         visibility: visible;
     }
 
     .lang-link {
         color: var(--white);
-        font-size: 0.85rem;
-        opacity: 0.8;
+        font-size: 1rem;
+        font-weight: 500;
+        opacity: 0.7;
+    }
+
+    .lang-link:hover {
+        opacity: 1;
+        color: var(--gold);
     }
 
     .lang-link.active {
@@ -1349,11 +1363,8 @@ footer {
 
     .lang-divider {
         color: var(--white);
-        opacity: 0.5;
-    }
-
-    .lang-divider {
-        color: var(--gray-mid);
+        opacity: 0.4;
+        font-size: 1rem;
     }
 
     /* Overlay background */
