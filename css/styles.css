@@ -556,7 +556,7 @@ section {
 
 .meet-petra-text p {
     font-size: 1.05rem;
-    color: var(--gray-dark);
+    color: var(--gray-light);
     margin-bottom: 1.5rem;
     line-height: 1.8;
     opacity: 0;
@@ -1261,6 +1261,15 @@ footer {
         padding: 1.5rem 2rem;
     }
 
+    /* Fix logo to be gold on mobile */
+    .nav-logo {
+        filter: brightness(0) saturate(100%) invert(73%) sepia(28%) saturate(546%) hue-rotate(7deg) brightness(89%) contrast(88%);
+    }
+
+    nav.scrolled .nav-logo {
+        filter: brightness(0) saturate(100%) invert(73%) sepia(28%) saturate(546%) hue-rotate(7deg) brightness(89%) contrast(88%);
+    }
+
     /* Show hamburger button */
     .mobile-menu-btn {
         display: flex;
@@ -1377,7 +1386,27 @@ footer {
     }
 
     .services-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .service-card {
+        padding: 1.5rem 1rem;
+    }
+
+    .service-number {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .service-title {
+        font-size: 1.1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .service-card .service-desc {
+        font-size: 0.8rem;
+        line-height: 1.6;
     }
 
     .portfolio-grid {
