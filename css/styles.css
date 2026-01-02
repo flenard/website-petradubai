@@ -206,6 +206,10 @@ nav.scrolled .hamburger-line {
     margin-left: 1.5rem;
 }
 
+.mobile-lang-selector {
+    display: none;
+}
+
 .lang-link {
     color: var(--white);
     text-decoration: none;
@@ -1282,7 +1286,7 @@ footer {
         display: flex;
     }
 
-    /* Mobile menu overlay */
+    /* Mobile menu overlay - MUST be solid black */
     .nav-links {
         position: fixed;
         top: 0;
@@ -1290,7 +1294,7 @@ footer {
         right: 0;
         width: 100%;
         height: 100vh;
-        background: var(--black);
+        background: #060606;
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -1326,48 +1330,47 @@ footer {
         color: var(--black) !important;
     }
 
-    /* Hide language selector from mobile nav bar */
-    .lang-selector {
-        position: fixed;
-        bottom: 6rem;
-        top: auto !important;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 1000;
+    /* Language selector - completely hidden on mobile by default */
+    /* Hide desktop language selector on mobile */
+    nav>.lang-selector {
+        display: none !important;
+    }
+
+    /* Mobile Language Selector Styles */
+    .mobile-lang-selector {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-top: 1rem;
         opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
-        background: var(--black);
-        padding: 0.5rem 1rem;
-        border-radius: 4px;
+        transform: translateY(20px);
+        transition: opacity 0.4s ease 0.4s, transform 0.4s ease 0.4s;
     }
 
-    /* Show language selector when menu is open */
-    .nav-links.active~.lang-selector {
+    /* When menu is active, fade in the language selector */
+    .nav-links.active .mobile-lang-selector {
         opacity: 1;
-        visibility: visible;
+        transform: translateY(0);
     }
 
-    .lang-link {
+    .mobile-lang-selector .lang-link {
         color: var(--white);
         font-size: 1rem;
         font-weight: 500;
-        opacity: 0.7;
+        opacity: 0.8;
+        text-decoration: none;
+        letter-spacing: 0.05em;
     }
 
-    .lang-link:hover {
+    .mobile-lang-selector .lang-link:hover,
+    .mobile-lang-selector .lang-link.active {
         opacity: 1;
         color: var(--gold);
     }
 
-    .lang-link.active {
-        color: var(--gold);
-        opacity: 1;
-    }
-
-    .lang-divider {
+    .mobile-lang-selector .lang-divider {
         color: var(--white);
-        opacity: 0.4;
+        opacity: 0.5;
         font-size: 1rem;
     }
 
