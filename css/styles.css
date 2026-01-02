@@ -1287,6 +1287,7 @@ footer {
     }
 
     /* Mobile menu overlay - MUST be solid black */
+    /* Mobile menu overlay - MUST be solid black with highest priority */
     .nav-links {
         position: fixed;
         top: 0;
@@ -1294,7 +1295,8 @@ footer {
         right: 0;
         width: 100%;
         height: 100vh;
-        background: #060606;
+        background: #060606 !important;
+        /* Force solid black background */
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -1331,8 +1333,8 @@ footer {
     }
 
     /* Language selector - completely hidden on mobile by default */
-    /* Hide desktop language selector on mobile */
-    nav>.lang-selector {
+    /* Hide desktop language selector on mobile - targeting DIV specifically to avoid hiding the new LI */
+    nav div.lang-selector {
         display: none !important;
     }
 
