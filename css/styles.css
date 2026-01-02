@@ -1319,6 +1319,27 @@ footer {
         visibility: visible;
     }
 
+    /* Bulletproof background layer for iOS using ::before */
+    .nav-links::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #060606;
+        z-index: -1;
+    }
+
+    /* CRITICAL: Remove backdrop-filter when menu is open to prevent iOS rendering bugs */
+    /* Using both :has() for modern browsers and .menu-open class as JS fallback */
+    nav:has(.nav-links.active),
+    nav.menu-open {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: transparent !important;
+    }
+
     .nav-links a {
         color: var(--white) !important;
         font-size: 1.3rem;

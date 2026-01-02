@@ -98,6 +98,7 @@ function initMobileMenu() {
     const navLinks = document.getElementById('navLinks');
     const navOverlay = document.getElementById('navOverlay');
     const langSelector = document.querySelector('.lang-selector');
+    const nav = document.getElementById('navbar'); // Get nav for backdrop-filter control
 
     if (!menuBtn || !navLinks) return;
 
@@ -108,6 +109,7 @@ function initMobileMenu() {
         navLinks.classList.toggle('active');
         if (navOverlay) navOverlay.classList.toggle('active');
         if (langSelector) langSelector.classList.toggle('active');
+        if (nav) nav.classList.toggle('menu-open'); // Toggle class for CSS fallback
 
         // Update ARIA
         menuBtn.setAttribute('aria-expanded', !isOpen);
@@ -121,6 +123,7 @@ function initMobileMenu() {
         navLinks.classList.remove('active');
         if (navOverlay) navOverlay.classList.remove('active');
         if (langSelector) langSelector.classList.remove('active');
+        if (nav) nav.classList.remove('menu-open'); // Remove class for CSS fallback
         menuBtn.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
     }
