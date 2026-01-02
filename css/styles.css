@@ -397,6 +397,73 @@ section {
 }
 
 /* ========================================
+   Section CTAs
+   ======================================== */
+.section-cta {
+    text-align: center;
+    margin-top: 4rem;
+    padding-top: 3rem;
+}
+
+.portfolio .section-cta {
+    padding-bottom: 4rem;
+}
+
+.section-cta-light {
+    margin-top: 5rem;
+}
+
+.cta-text {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--gray-dark);
+    margin-bottom: 1.5rem;
+    font-style: italic;
+}
+
+.section-cta-light .cta-text {
+    color: var(--gray-light);
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: var(--gold);
+    color: var(--black);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: all 0.4s ease;
+    border: 2px solid var(--gold);
+}
+
+.cta-button:hover,
+.cta-button:focus-visible {
+    background: transparent;
+    color: var(--gold);
+}
+
+.cta-button:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 4px;
+}
+
+.cta-button-outline {
+    background: transparent;
+    color: var(--white);
+    border-color: var(--gold);
+}
+
+.cta-button-outline:hover,
+.cta-button-outline:focus-visible {
+    background: var(--gold);
+    color: var(--black);
+}
+
+/* ========================================
    Difference/About Section
    ======================================== */
 .difference {
@@ -441,6 +508,129 @@ section {
     bottom: -2rem;
     border: 1px solid var(--gold);
     z-index: -1;
+}
+
+/* ========================================
+   Meet Petra Section
+   ======================================== */
+.meet-petra {
+    background: var(--black);
+    color: var(--white);
+}
+
+.meet-petra-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+}
+
+.meet-petra-image {
+    position: relative;
+}
+
+.meet-petra-image img {
+    width: 100%;
+    height: auto;
+    max-height: 700px;
+    object-fit: cover;
+    object-position: center top;
+}
+
+.meet-petra-image::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -2rem;
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--gold);
+    z-index: -1;
+}
+
+.meet-petra-text .section-title {
+    color: var(--white);
+}
+
+.meet-petra-text p {
+    font-size: 1.05rem;
+    color: var(--gray-dark);
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.meet-petra-image {
+    opacity: 0;
+    transform: translateX(-50px);
+}
+
+.meet-petra-credentials {
+    display: flex;
+    gap: 3rem;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--gray-lighter);
+}
+
+.credential {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.credential-number {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+}
+
+.credential-label {
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gray-mid);
+}
+
+@media (max-width: 1200px) {
+    .meet-petra-content {
+        gap: 4rem;
+    }
+
+    .meet-petra-credentials {
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .meet-petra-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .meet-petra-image {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .meet-petra-image::after {
+        left: -1rem;
+    }
+
+    .meet-petra-credentials {
+        justify-content: center;
+    }
+
+    .credential-number {
+        font-size: 2rem;
+    }
 }
 
 /* ========================================
@@ -905,8 +1095,14 @@ section {
 }
 
 .marquee-item:hover {
-    filter: grayscale(0%);
+    filter: brightness(0) saturate(100%) invert(68%) sepia(52%) saturate(405%) hue-rotate(8deg) brightness(97%) contrast(88%);
     opacity: 1;
+}
+
+/* Pause marquee when hovering on individual item */
+.marquee-item:hover~.marquee-item,
+.marquee:has(.marquee-item:hover) {
+    animation-play-state: paused;
 }
 
 .marquee-item img {
@@ -947,7 +1143,7 @@ footer {
     height: 50px;
     width: auto;
     margin-bottom: 2rem;
-    filter: brightness(0) invert(1);
+    filter: brightness(0) saturate(100%) invert(68%) sepia(52%) saturate(405%) hue-rotate(8deg) brightness(97%) contrast(88%);
 }
 
 .footer-brand p {
@@ -962,7 +1158,7 @@ footer {
     font-weight: 400;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: var(--gray-mid);
+    color: var(--gold);
     margin-bottom: 2rem;
 }
 

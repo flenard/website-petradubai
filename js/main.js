@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof gsap === 'undefined') {
         console.warn('GSAP not loaded. Animations disabled.');
         // Show content without animations
-        document.querySelectorAll('.hero-tagline .line, .hero-subtitle, .hero-cta, .scroll-indicator, .section-label, .section-title, .difference-text p, .difference-image, .service-card, .portfolio-item, .testimonial, .testimonial-author, .faq-item').forEach(el => {
+        document.querySelectorAll('.hero-tagline .line, .hero-subtitle, .hero-cta, .scroll-indicator, .section-label, .section-title, .difference-text p, .difference-image, .service-card, .portfolio-item, .testimonial, .testimonial-author, .faq-item, .meet-petra-image, .meet-petra-text p, .credential').forEach(el => {
             el.style.opacity = '1';
             el.style.transform = 'none';
         });
@@ -160,7 +160,7 @@ function initAnimations() {
             y: 0,
             clearProps: 'transform'
         });
-        gsap.set('.section-label, .section-title, .difference-text p, .difference-image, .service-card, .portfolio-item, .testimonial, .testimonial-author, .faq-item', {
+        gsap.set('.section-label, .section-title, .difference-text p, .difference-image, .service-card, .portfolio-item, .testimonial, .testimonial-author, .faq-item, .meet-petra-image, .meet-petra-text p, .credential', {
             opacity: 1,
             y: 0,
             x: 0,
@@ -330,6 +330,50 @@ function initSectionAnimations() {
     const developersSection = document.querySelector('.developers');
     if (developersSection) {
         animateSectionHeader(developersSection);
+    }
+
+    // Meet Petra Section
+    const meetPetraSection = document.querySelector('.meet-petra');
+    if (meetPetraSection) {
+        animateSectionHeader(meetPetraSection);
+
+        // Animate image sliding in from left
+        gsap.to('.meet-petra-image', {
+            opacity: 1,
+            x: 0,
+            duration: 1.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.meet-petra',
+                start: 'top 70%',
+            }
+        });
+
+        // Animate paragraphs with stagger
+        gsap.to('.meet-petra-text p', {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.meet-petra-text',
+                start: 'top 70%',
+            }
+        });
+
+        // Animate credentials with stagger and counter effect
+        gsap.to('.credential', {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.meet-petra-credentials',
+                start: 'top 85%',
+            }
+        });
     }
 
     // FAQ Section
