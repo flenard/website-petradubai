@@ -24,6 +24,11 @@ This document tracks marketing recommendations for the Petra Dubai website, orga
 | Mobile hamburger menu | Dec 30, 2024 | Slide-out menu with animation |
 | FAQ section | Dec 30, 2024 | 6 questions with accordion UI |
 | Portfolio hover effects | Dec 30, 2024 | Edge-to-edge grid with labels |
+| Meet Petra section | Jan 01, 2026 | Personal branding with credentials |
+| Security hardening (CSP, SRI) | Jan 02, 2026 | Content Security Policy, Subresource Integrity |
+| Sitemap with hreflang | Jan 02, 2026 | Proper multilingual SEO support |
+| security.txt | Jan 02, 2026 | RFC 9116 compliant security contact |
+| HTML validation fixes | Jan 02, 2026 | Fixed unclosed tags, fetchpriority placement |
 
 ---
 

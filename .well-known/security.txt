@@ -1,0 +1,15 @@
+# Security Policy for Petra Dubai
+# https://petradubai.ae
+
+# Contact for security issues
+Contact: mailto:petra@petradubai.ae
+Contact: https://wa.me/971501140972
+
+# Preferred languages
+Preferred-Languages: en, hu
+
+# Policy expiration (1 year from creation)
+Expires: 2026-01-02T00:00:00.000Z
+
+# Canonical URL
+Canonical: https://petradubai.ae/.well-known/security.txt

@@ -40,10 +40,11 @@ Color palette:
 - Developer partner logos: Emaar, Damac, Sobha, Meraas, HH, Omniyat, Binghatti, Nakheel, Ellington, MAF
 - Content source data in `webiste-text.csv`
 
-### SEO Files
-- `sitemap.xml` - XML sitemap for search engines
+### SEO & Security Files
+- `sitemap.xml` - XML sitemap with hreflang for multilingual SEO
 - `robots.txt` - Crawler instructions
 - `llms.txt` - AI/LLM crawler information (llmstxt.org format)
+- `.well-known/security.txt` - Security vulnerability reporting contact (RFC 9116)
 
 ## Development
 
@@ -95,8 +96,13 @@ JavaScript in `main.js` (`initEmailProtection()`) assembles these at runtime.
 - Print stylesheet
 
 ### Security
+- **Content Security Policy (CSP)**: Restricts script sources, prevents XSS, blocks framing
+- **Subresource Integrity (SRI)**: GSAP CDN scripts have integrity hashes to prevent tampering
+- **Referrer Policy**: `strict-origin-when-cross-origin` limits referrer information exposure
+- **X-Content-Type-Options**: `nosniff` prevents MIME type sniffing
 - All external links have `rel="noopener noreferrer"`
 - target="_blank" links are secured
+- `security.txt` in `.well-known/` for vulnerability reporting (RFC 9116)
 
 ### Code Quality
 - No inline styles (moved to CSS classes)

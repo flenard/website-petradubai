@@ -6,6 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Petra Dubai | Luxus ingatlanok európai befektetőknek</title>
 
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' https://cdnjs.cloudflare.com;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        font-src 'self' https://fonts.gstatic.com;
+        img-src 'self' data: https:;
+        media-src 'self';
+        connect-src 'self' https://wa.me;
+        frame-ancestors 'none';
+        base-uri 'self';
+        form-action 'self';
+    ">
+
     <!-- SEO Meta Tags -->
     <meta name="description"
         content="A Petra Dubai segít a magyar befektetőknek prémium dubaji ingatlanok megszerzésében. Szakértői útmutatás vételhez, eladáshoz és befektetéshez a dubaji luxusingatlan-piacon.">
@@ -111,13 +127,14 @@
                 <span class="lang-divider">|</span>
                 <a href="index.html" class="lang-link active" aria-label="Magyar">HU</a>
             </li>
+        </ul>
 
-            <!-- Language Selector -->
-            <div class="lang-selector">
-                <a href="../index.html" class="lang-link" aria-label="English">EN</a>
-                <span class="lang-divider">|</span>
-                <a href="index.html" class="lang-link active" aria-label="Magyar">HU</a>
-            </div>
+        <!-- Language Selector (Desktop) -->
+        <div class="lang-selector">
+            <a href="../index.html" class="lang-link" aria-label="English">EN</a>
+            <span class="lang-divider">|</span>
+            <a href="index.html" class="lang-link active" aria-label="Magyar">HU</a>
+        </div>
     </nav>
 
     <!-- Mobile Menu Overlay -->
@@ -126,8 +143,8 @@
     <!-- Hero Section -->
     <section class="hero" id="main-content">
         <video class="hero-video" autoplay muted loop playsinline preload="metadata"
-            poster="../assets/LUMENA_ALTA-16.webp">
-            <source src="../assets/petra_dubai_intro_video.mp4" type="video/mp4" fetchpriority="high">
+            poster="../assets/LUMENA_ALTA-16.webp" fetchpriority="high">
+            <source src="../assets/petra_dubai_intro_video.mp4" type="video/mp4">
             A böngészője nem támogatja a videó taget.
         </video>
         <div class="hero-overlay"></div>
@@ -547,8 +564,13 @@
     </footer>
 
     <!-- Scripts moved to end with defer for performance -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <!-- GSAP with Subresource Integrity for security -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+        integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
+        integrity="sha512-Ic9xkERjyZ1xgJ5svx3y0u3xrvfT/uPkV99LBwe68xjy/mGtO+4eURHZBW2xW4SZbFrF1Tf090XqB+EVgXnVjw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
     <script src="../js/main.js" defer></script>
 </body>
 
