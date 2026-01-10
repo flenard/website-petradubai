@@ -3,7 +3,7 @@
 
 # Contact for security issues
 Contact: mailto:petra@petradubai.ae
-Contact: https://wa.me/971501140972
+Contact: https://wa.me/971525467525
 
 # Preferred languages
 Preferred-Languages: en, hu

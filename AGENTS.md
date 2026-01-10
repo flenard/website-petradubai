@@ -143,7 +143,7 @@ if (typeof gsap === 'undefined') {
 
 ## Contact Integration
 
-- WhatsApp: `https://wa.me/971501140972`
+- WhatsApp: `https://wa.me/971525467525`
 - Email: `petra@petradubai.ae`
 
 ## External Dependencies (CDN only)

@@ -520,96 +520,149 @@ section {
 .meet-petra {
     background: var(--black);
     color: var(--white);
+    overflow: hidden;
 }
 
 .meet-petra-content {
     max-width: 1400px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 5rem;
     align-items: center;
 }
 
 .meet-petra-image {
     position: relative;
+    opacity: 0;
+    transform: translateX(-50px);
 }
 
 .meet-petra-image img {
     width: 100%;
     height: auto;
-    max-height: 700px;
+    max-height: 650px;
     object-fit: cover;
     object-position: center top;
+    filter: grayscale(15%) contrast(1.05);
+    border-radius: 2px;
 }
 
+/* Gradient overlay to blend with dark background */
+.meet-petra-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        transparent 70%,
+        var(--black) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+    border-radius: 2px;
+}
+
+/* Gold accent lines - L shape */
 .meet-petra-image::after {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: -2rem;
-    width: 100%;
-    height: 100%;
-    border: 1px solid var(--gold);
-    z-index: -1;
+    top: 2rem;
+    left: -1.5rem;
+    bottom: -1.5rem;
+    right: 2rem;
+    border-left: 2px solid var(--gold);
+    border-bottom: 2px solid var(--gold);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.meet-petra-text {
+    padding-right: 2rem;
+}
+
+.meet-petra-text .section-label {
+    color: var(--gold);
 }
 
 .meet-petra-text .section-title {
     color: var(--white);
+    margin-bottom: 2rem;
 }
 
 .meet-petra-text p {
     font-size: 1.05rem;
     color: var(--gray-light);
     margin-bottom: 1.5rem;
-    line-height: 1.8;
+    line-height: 1.85;
     opacity: 0;
     transform: translateY(30px);
 }
 
-.meet-petra-image {
-    opacity: 0;
-    transform: translateX(-50px);
+.meet-petra-text p:first-of-type {
+    font-size: 1.15rem;
+    color: var(--off-white);
 }
 
 .meet-petra-credentials {
     display: flex;
-    gap: 3rem;
+    gap: 0;
     margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--gray-lighter);
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(201, 169, 98, 0.3);
 }
 
 .credential {
+    flex: 1;
     text-align: center;
+    padding: 0 1.5rem;
+    position: relative;
     opacity: 0;
     transform: translateY(20px);
+}
+
+.credential:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 50px;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(201, 169, 98, 0.4), transparent);
 }
 
 .credential-number {
     display: block;
     font-family: var(--font-display);
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 300;
     color: var(--gold);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    line-height: 1;
 }
 
 .credential-label {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 400;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--gray-mid);
 }
 
 @media (max-width: 1200px) {
     .meet-petra-content {
+        grid-template-columns: 1fr 1fr;
         gap: 4rem;
     }
 
     .meet-petra-credentials {
-        gap: 2rem;
+        gap: 0;
+    }
+
+    .credential-number {
+        font-size: 2.5rem;
     }
 }
 
@@ -620,7 +673,7 @@ section {
     }
 
     .meet-petra-image {
-        max-width: 400px;
+        max-width: 350px;
         margin: 0 auto;
     }
 
@@ -628,8 +681,16 @@ section {
         left: -1rem;
     }
 
+    .meet-petra-text {
+        padding-right: 0;
+    }
+
     .meet-petra-credentials {
         justify-content: center;
+    }
+
+    .credential {
+        padding: 0 1rem;
     }
 
     .credential-number {
